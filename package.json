@@ -1,0 +1,28 @@
+{
+  "name": "figma-to-vercel",
+  "version": "0.1.0",
+  "description": "Ferramentas para gerar aplicações a partir de projetos Figma e publicar na Vercel",
+  "main": "dist/index.js",
+  "scripts": {
+    "compilar": "tsc",
+    "listar:projetos": "ts-node src/cli/listar-projetos.ts",
+    "validar:configuracoes": "ts-node src/cli/validar-configuracoes.ts"
+  },
+  "keywords": [
+    "figma",
+    "vercel",
+    "automacao",
+    "configuracao"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "yaml": "^2.5.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}

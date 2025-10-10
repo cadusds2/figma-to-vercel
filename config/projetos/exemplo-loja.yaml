@@ -1,0 +1,28 @@
+projeto:
+  identificador: loja-virtual
+  nome: "Loja Virtual Exemplo"
+  descricao: "Projeto fictício para demonstrar configuração do pipeline."
+  etiquetas:
+    - ecommerce
+    - prototipo
+figma:
+  arquivoId: "FIGMA_ARQUIVO_EXEMPLO"
+  tokenLeitura: "FIGMA_TOKEN_FICTICIO"
+  bibliotecaComponentes: "Biblioteca Base"
+  tokensDesign:
+    - cores-basicas
+    - tipografia-principal
+preferencias:
+  geracao:
+    estrategiaComponentes: isolados
+    prefixoComponentes: "Loja"
+    ignorarPaginas:
+      - "Fluxos Antigos"
+deploy:
+  vercel:
+    projeto: "loja-virtual-exemplo"
+    ambiente: producao
+    variaveis:
+      API_BASE_URL: "https://api.exemplo.com"
+      FEATURE_FLAG_NOVO_CHECKOUT: "true"
+  comentarios: "Deploy automático previsto para iteração 4."
