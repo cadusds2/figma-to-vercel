@@ -13,7 +13,7 @@ Projeto destinado a automatizar a geração e o deploy de sites estáticos na Ve
 2. **Parser de documentos**: interpretar o JSON do Figma, normalizar cores, tipografia e layout, e construir uma representação intermediária.
 3. **Gerador de componentes**: transformar a representação intermediária em componentes React com estilos compatíveis (CSS Modules, Tailwind ou styled-components a definir).
 4. **Automação de deploy**: preparar scripts que construam o projeto gerado e executem `vercel deploy` usando tokens seguros.
-5. **Interface de configuração**: definir esquema em JSON/YAML para parametrizar mapeamentos e comportamentos do gerador.
+5. **Interface de configuração**: definir esquema em YAML para parametrizar mapeamentos e comportamentos do gerador.
 
 ## Arquitetura proposta
 - **CLI/Serviço Node.js** responsável por orquestrar as etapas de importação, transformação e deploy.
@@ -30,20 +30,46 @@ Projeto destinado a automatizar a geração e o deploy de sites estáticos na Ve
 - Axios ou fetch nativo para chamadas HTTP
 - Jest + Testing Library para testes unitários
 
-## Estrutura inicial sugerida
+## Estrutura atual
 ```
 figma-to-vercel/
+├── config/
+│   └── projetos/
+│       └── exemplo-loja.yaml
 ├── src/
 │   ├── cli/
-│   ├── adaptadores/
-│   ├── gerador/
-│   └── utils/
-├── templates/
-├── config/
-│   └── exemplo.projeto.json
-├── scripts/
-└── docs/
+│   │   ├── listar-projetos.ts
+│   │   └── validar-configuracoes.ts
+│   └── configuracao/
+│       ├── erros.ts
+│       ├── esquema.ts
+│       └── leitor-projetos.ts
+├── docs/
+│   └── configuracao-projetos.md
+├── README.md
+├── package.json
+└── tsconfig.json
 ```
+
+## Módulo de configuração de projetos
+O módulo de configuração centraliza, em arquivos `.yaml` ou `.yml`, as informações necessárias para importar projetos do Figma e preparar o deploy na Vercel. Ele oferece:
+
+- **Esquema validado com Zod** garantindo presença de chaves obrigatórias e mensagens de erro em português.
+- **Suporte a múltiplos projetos** organizados em `config/projetos/`.
+- **CLI auxiliar** para listar e validar configurações.
+
+O guia completo com exemplo de arquivo encontra-se em [`docs/configuracao-projetos.md`](docs/configuracao-projetos.md).
+
+### Comandos disponíveis
+
+```bash
+npm install
+npm run listar:projetos
+npm run validar:configuracoes
+```
+
+- `listar:projetos`: lista identificadores disponíveis e respectivos destinos na Vercel.
+- `validar:configuracoes`: garante que todos os arquivos sigam o esquema estabelecido.
 
 ## Fluxo de desenvolvimento recomendado
 1. Configurar tokens e variáveis de ambiente necessários (FIGMA_TOKEN, FIGMA_FILE_ID, VERCEL_TOKEN, etc.).
@@ -56,7 +82,7 @@ figma-to-vercel/
 ## Roteiro de implementação
 | Iteração | Entregas principais |
 |----------|---------------------|
-| 1 | CLI mínima com autenticação no Figma e download de JSON | 
+| 1 | CLI mínima com autenticação no Figma e download de JSON |
 | 2 | Parser inicial convertendo frames em estrutura intermediária |
 | 3 | Gerador produzindo páginas estáticas básicas |
 | 4 | Integração com Vercel e deploy automático |
