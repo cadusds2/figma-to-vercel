@@ -1,0 +1,43 @@
+prototipos:
+  - identificador: landing-institucional
+    nome: "Landing institucional"
+    file_key: "LANDING123"
+    link_visualizacao: "https://www.figma.com/file/LANDING123/landing-institucional"
+    responsavel: "Patrícia Andrade"
+    revisores:
+      - "Equipe Design Alpha"
+      - "Equipe Engenharia Beta"
+    ultima_atualizacao: "2024-05-20"
+    escopo:
+      - "Hero responsivo"
+      - "Seção de depoimentos"
+      - "Grade de produtos"
+    observacoes: "Inclui variações mobile e notas para estados de hover."
+  - identificador: fluxo-formulario
+    nome: "Fluxo de conversão com formulário"
+    file_key: "FORM12345"
+    link_visualizacao: "https://www.figma.com/file/FORM12345/fluxo-formulario"
+    responsavel: "Leonardo Mota"
+    revisores:
+      - "Equipe Design Alpha"
+      - "Equipe Produto Gama"
+    ultima_atualizacao: "2024-05-21"
+    escopo:
+      - "Formulário com validações"
+      - "Página de confirmação"
+      - "Estados de erro"
+    observacoes: "Adicionar comentários com máscaras e mensagens dinâmicas."
+  - identificador: componentes-dinamicos
+    nome: "Biblioteca de componentes dinâmicos"
+    file_key: "DINAMICO99"
+    link_visualizacao: "https://www.figma.com/file/DINAMICO99/componentes-dinamicos"
+    responsavel: "Sofia Lima"
+    revisores:
+      - "Equipe Engenharia Beta"
+      - "Equipe QA Delta"
+    ultima_atualizacao: "2024-05-22"
+    escopo:
+      - "Carrossel automatizado"
+      - "Acordião com variantes"
+      - "Cartões interativos"
+    observacoes: "Mapear interações com animações anotadas no Figma."
