@@ -1,29 +1,56 @@
-# Issue: Planejamento da implementação
+# Issue: Planejamento para início da implementação
 
 ## Contexto
-Este documento consolida os pontos críticos que precisam ser estruturados para que o pipeline "Figma → Gerador → Deploy" funcione de forma coordenada. O foco está em alinhar responsabilidades, dependências técnicas e próximos artefatos para garantir uma execução fluida.
+O repositório já possui um módulo sólido de configuração que oferece leitura, validação e listagem de projetos em arquivos YAML. Há uma CLI inicial para validar essas configurações, mas ainda não existem integrações com a API do Figma nem com a Vercel, tampouco geradores de código. Esta issue documenta as lacunas e os passos necessários para iniciar a fase de implementação do pipeline completo.
 
-## Lacunas
-- Falta um comando de linha de comando principal (`cli orchestrador`) que dispare sequencialmente as etapas de importação dos dados do Figma, parsing dos arquivos, geração do projeto e disparo do deploy na Vercel. É necessário definir responsabilidades claras para cada etapa, parâmetros obrigatórios (token do Figma, ID do arquivo, caminho de saída, ambiente de deploy) e como relatar erros.
-- Não há diretrizes completas sobre como baixar e versionar os assets do Figma (imagens raster, SVGs e fontes). Precisamos definir pasta de armazenamento (`assets/figma` dentro do repositório), convenção de nomes, estratégia de cache e ligação com o gerador de código.
+## Avaliação do estado atual
+- ✅ **Configurações declarativas**: esquema Zod consolidado (`src/configuracao/esquema.ts`) e exemplo em `config/projetos/exemplo-loja.yaml`.
+- ✅ **CLI de suporte**: comandos `listar-projetos` e `validar-configuracoes` prontos para uso básico.
+- ⚠️ **Ausência de integração com Figma**: nenhum adaptador HTTP ou cache local de arquivos JSON.
+- ⚠️ **Sem representação intermediária**: não há modelos tipados para nós de design, estilos ou componentes.
+- ⚠️ **Gerador inexistente**: falta o mecanismo que converte a representação intermediária em código Next.js.
+- ⚠️ **Deploy não automatizado**: nenhum script ou integração com a CLI/SDK da Vercel foi criado.
 
-## Plano de ação
-1. Especificar o comando `figma-vercel sync` como porta de entrada da CLI orquestradora, detalhando:
-   - Sequência exata das fases: `importar-figma` → `parsear-componentes` → `gerar-codigo` → `publicar-vercel`.
-   - Parâmetros esperados (variáveis de ambiente ou flags): `--token-figma`, `--arquivo-figma`, `--saida`, `--ambiente`, `--forcar-deploy`.
-   - Responsabilidades de cada módulo invocado (conector Figma, parser de tokens/componentes, gerador Next.js, integrador Vercel) e formato dos logs.
-2. Adicionar subcomando ou etapa intermediária para gestão dos assets:
-   - **Download**: realizar requisições às APIs do Figma para imagens raster e SVG, salvando os arquivos em `assets/figma/{tipo}/{versao}/`.
-   - **Versionamento**: registrar metadados (hash, timestamp, origem) em um manifesto (`assets/manifesto.json`) consumido pelo gerador para resolver referências.
-   - **Referências no gerador**: criar convenção de importação (ex.: `@assets/figma/...`) garantindo atualização automática quando o manifesto mudar.
-   - **Integração ao deploy**: incluir os assets no pacote de build enviado à Vercel (via configuração de `vercel.json` e verificação no `postbuild`).
-3. Atualizar a documentação existente (README e guias de fluxo) com o passo a passo único da CLI, destacando variáveis obrigatórias e exemplos de uso.
+## Lacunas para iniciar a implementação
+### 1. Integração com o Figma
+- Definir estratégia de autenticação usando tokens pessoais ou variáveis de ambiente.
+- Implementar cliente HTTP com tratamento de erros (limites de rate, respostas 403/404).
+- Salvar instantâneos dos JSON recebidos em `docs/` para facilitar depuração.
 
-## Resultados esperados
-- Pipeline automatizado com execução consistente via CLI única.
-- Assets versionados e empacotados de maneira previsível, reduzindo inconsistências entre ambientes.
+### 2. Modelo de dados e parser
+- Mapear tipos TypeScript para nós relevantes (frames, componentes, textos, imagens).
+- Implementar parser que transforme o JSON bruto em estrutura normalizada.
+- Definir estratégia para tokens de design (cores, tipografia, espaçamentos).
+
+### 3. Gerador de código
+- Escolher biblioteca de estilos padrão (CSS Modules, Tailwind ou styled-components).
+- Criar templates base e motor de geração (ex.: Mustache, Handlebars ou funções próprias).
+- Garantir saída organizada em diretório temporário para posterior deploy.
+
+### 4. Automação de testes e qualidade
+- Configurar Jest/Testing Library para validar parser e gerador.
+- Adicionar linting (ESLint/Prettier) alinhado às convenções do projeto.
+- Definir matriz mínima de testes automatizados para cada iteração.
+
+### 5. Pipeline de deploy na Vercel
+- Preparar integração com a CLI da Vercel (token via variável de ambiente).
+- Automatizar criação/atualização de projetos alvo.
+- Especificar passo a passo de deploy contínuo (incluindo pré-visualizações).
+
+### 6. Governança das configurações
+- Estabelecer convenção para múltiplos ambientes por projeto (produção/homologação).
+- Documentar como segredos serão armazenados (dotenv, GitHub Secrets, Vercel secrets).
+
+## Plano de ação proposto
+1. **Configurar cliente Figma**: criar módulo `src/figma/` com autenticação, download e armazenamento local de JSON.
+2. **Definir modelos intermediários**: adicionar tipos e interfaces em `src/modelo/` para representar nós e estilos.
+3. **Construir parser inicial**: converter frames principais em estrutura intermediária reutilizável.
+4. **Prototipar gerador**: gerar páginas estáticas simples utilizando o modelo intermediário.
+5. **Integrar com Vercel**: script inicial de deploy consumindo o artefato gerado.
+6. **Estabelecer testes automatizados**: criar suites de testes para garantir regressões mínimas.
+7. **Documentar decisões**: atualizar README principal e criar guias específicos em `docs/` a cada avanço.
 
 ## Próximos artefatos necessários
-- Documento de especificação da CLI orquestradora (`docs/cli/orquestradora.md`) descrevendo comandos, flags e tratamento de erros.
-- Guia de fluxo de assets (`docs/arquitetura/fluxo-assets.md`) detalhando armazenamento, manifesto e integração com o deploy na Vercel.
-- Scripts ou protótipos iniciais para validação da extração e versionamento dos assets diretamente na CLI.
+- Documento de arquitetura detalhando fluxos de dados e responsabilidades entre módulos.
+- Guia de autenticação explicando variáveis de ambiente e gestão de segredos.
+- Exemplos de saída gerada (templates) para orientar contribuições futuras.
