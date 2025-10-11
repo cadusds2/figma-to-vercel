@@ -42,5 +42,11 @@ Este documento consolida os componentes prioritários identificados nos arquivos
 - Incluir regras de lint que alertem sobre estados não previstos nos tokens.
 - Automatizar a criação de stories com base na tabela de componentes e estados descrita acima.
 
+## Origem dos tokens e rastreabilidade
+- **Cores:** replicam os estilos `Foundations / Colors / Primárias` e `Foundations / Colors / Feedback` do arquivo Figma "Biblioteca Web v1". Cada chave (`primarias.destaque`, `feedback.erro` etc.) corresponde ao nome exibido na paleta compartilhada com o time de produto.
+- **Tipografia:** deriva dos estilos `Foundations / Typography` do mesmo arquivo, mantendo pesos e tamanhos originais. O gerador deve usar essas entradas para montar os `styled-components` tipográficos (`Heading`, `Subheading`, `Body`, `Caption`).
+- **Espaçamentos:** baseados na grade `Foundations / Spacing` definida na página de tokens do Figma. Os valores `compacto` e `confortavel` traduzem as escalas compacta e padrão utilizadas nas telas prioritárias.
+- **Processo de atualização:** qualquer mudança aprovada no Figma deve ser sincronizada manualmente para `config/tokens/tema-padrao.yaml`, seguindo o mesmo nome do estilo para preservar a ligação automática.
+
 ---
 **Referência de tokens:** o arquivo `config/tokens/tema-padrao.yaml` centraliza cores, tipografia e espaçamentos. O gerador automático deve importar esses valores antes de compor as variações de styled-components, garantindo que os estados de interação descritos aqui utilizem as mesmas definições.

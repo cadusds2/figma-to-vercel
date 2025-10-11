@@ -1,5 +1,6 @@
 # Catálogo de tokens consumido pelo gerador automático antes de montar os componentes.
 # Paleta de cores padronizada para componentes e estados de interação.
+# Fonte: Figma "Biblioteca Web v1" > Foundations / Colors.
 cores:
   primarias:
     destaque: "#4F46E5"      # Botões primários e elementos de foco.
@@ -15,6 +16,7 @@ cores:
     erro: "#EF4444"           # Estados de erro e validação negativa.
 
 # Escalas tipográficas baseadas nas hierarquias descritas na biblioteca.
+# Fonte: Figma "Biblioteca Web v1" > Foundations / Typography.
 tipografia:
   familia-principal: "'Inter', sans-serif"
   pesos:
@@ -31,6 +33,7 @@ tipografia:
     corpo: 1.5
 
 # Espaçamentos responsivos utilizados nos componentes e grades.
+# Fonte: Figma "Biblioteca Web v1" > Foundations / Spacing.
 espacamentos:
   compacto:
     xs: "4px"
