@@ -34,18 +34,31 @@ Projeto destinado a automatizar a geração e o deploy de sites estáticos na Ve
 ```
 figma-to-vercel/
 ├── config/
-│   └── projetos/
-│       └── exemplo-loja.yaml
+│   ├── README.md
+│   ├── projetos/
+│   │   └── exemplo-loja.yaml
+│   └── tokens/
+│       ├── README.md
+│       └── tema-padrao.yaml
+├── docs/
+│   ├── componentes/
+│   │   └── base-biblioteca.md
+│   └── configuracao-projetos.md
 ├── src/
 │   ├── cli/
 │   │   ├── listar-projetos.ts
 │   │   └── validar-configuracoes.ts
+│   ├── componentes/
+│   │   ├── catalogo-base.ts
+│   │   ├── index.ts
+│   │   ├── README.md
+│   │   ├── tema-styled.ts
+│   │   └── tipos.ts
 │   └── configuracao/
+│       ├── carregador-tokens.ts
 │       ├── erros.ts
 │       ├── esquema.ts
 │       └── leitor-projetos.ts
-├── docs/
-│   └── configuracao-projetos.md
 ├── README.md
 ├── package.json
 └── tsconfig.json
@@ -59,6 +72,15 @@ O módulo de configuração centraliza, em arquivos `.yaml` ou `.yml`, as inform
 - **CLI auxiliar** para listar e validar configurações.
 
 O guia completo com exemplo de arquivo encontra-se em [`docs/configuracao-projetos.md`](docs/configuracao-projetos.md).
+
+## Catálogo de componentes base
+O Passo 1 do roadmap estabeleceu um catálogo inicial de componentes e tokens compartilhados. O código correspondente encontra-se em `src/componentes/` e oferece:
+
+- **Catálogo imutável** em [`src/componentes/catalogo-base.ts`](src/componentes/catalogo-base.ts), contendo identificadores, estados obrigatórios e tokens fundamentais.
+- **Conversão de tema** em [`src/componentes/tema-styled.ts`](src/componentes/tema-styled.ts), que transforma os tokens validados em um objeto pronto para `styled-components`.
+- **Carregador de tokens** em [`src/configuracao/carregador-tokens.ts`](src/configuracao/carregador-tokens.ts), facilitando o consumo de arquivos YAML em `config/tokens/`.
+
+As diretrizes detalhadas continuam documentadas em [`docs/componentes/base-biblioteca.md`](docs/componentes/base-biblioteca.md).
 
 ### Comandos disponíveis
 
