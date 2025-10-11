@@ -1,0 +1,44 @@
+# Paleta de cores padronizada para componentes e estados de interação.
+cores:
+  primarias:
+    destaque: "#4F46E5"      # Botões primários e elementos de foco.
+    destaque-hover: "#4338CA" # Variação para estados hover/press.
+    contorno: "#A5B4FC"       # Borda visível em foco e campos ativos.
+  neutras:
+    superficie: "#FFFFFF"     # Planos de fundo de cartões e campos.
+    contraste: "#1F2937"      # Texto principal e ícones prioritários.
+    apoio: "#6B7280"          # Textos secundários e bordas discretas.
+  feedback:
+    sucesso: "#10B981"        # Mensagens de confirmação.
+    atencao: "#F59E0B"        # Alertas de aviso.
+    erro: "#EF4444"           # Estados de erro e validação negativa.
+
+# Escalas tipográficas baseadas nas hierarquias descritas na biblioteca.
+tipografia:
+  familia-principal: "'Inter', sans-serif"
+  pesos:
+    regular: 400
+    seminegrito: 600
+    negrito: 700
+  tamanhos:
+    titulo: "32px"
+    subtitulo: "24px"
+    corpo: "16px"
+    legenda: "14px"
+  alturas-linha:
+    titulo: 1.25
+    corpo: 1.5
+
+# Espaçamentos responsivos utilizados nos componentes e grades.
+espacamentos:
+  compacto:
+    xs: "4px"
+    sm: "8px"
+    md: "12px"
+  confortavel:
+    lg: "16px"
+    xl: "24px"
+    xxl: "32px"
+  grade:
+    coluna-base: "8px"      # Unidade mínima para calcular colunas fluidas.
+    largura-minima-acao: "48px" # Garante acessibilidade em botões.
