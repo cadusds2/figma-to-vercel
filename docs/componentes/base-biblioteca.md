@@ -42,6 +42,11 @@ Este documento consolida os componentes prioritários identificados nos arquivos
 - Incluir regras de lint que alertem sobre estados não previstos nos tokens.
 - Automatizar a criação de stories com base na tabela de componentes e estados descrita acima.
 
+## Implementação em código
+- [`src/configuracao/carregador-tokens.ts`](../../src/configuracao/carregador-tokens.ts): responsável por ler os tokens em YAML e validar a estrutura com `zod`.
+- [`src/componentes/catalogo-base.ts`](../../src/componentes/catalogo-base.ts): expõe o catálogo imutável de componentes com estados, tokens fundamentais e diretrizes responsivas.
+- [`src/componentes/tema-styled.ts`](../../src/componentes/tema-styled.ts): converte os tokens aprovados em um objeto de tema pronto para consumo pelos `styled-components`.
+
 ## Origem dos tokens e rastreabilidade
 - **Cores:** replicam os estilos `Foundations / Colors / Primárias` e `Foundations / Colors / Feedback` do arquivo Figma "Biblioteca Web v1". Cada chave (`primarias.destaque`, `feedback.erro` etc.) corresponde ao nome exibido na paleta compartilhada com o time de produto.
 - **Tipografia:** deriva dos estilos `Foundations / Typography` do mesmo arquivo, mantendo pesos e tamanhos originais. O gerador deve usar essas entradas para montar os `styled-components` tipográficos (`Heading`, `Subheading`, `Body`, `Caption`).
