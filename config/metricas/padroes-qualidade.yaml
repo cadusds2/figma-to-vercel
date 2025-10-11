@@ -1,0 +1,41 @@
+limiares:
+  cobertura_componentes:
+    descricao: "Percentual mínimo de componentes suportados automaticamente."
+    alvo: 0.85
+    bloqueio: 0.7
+    unidade: "proporcao"
+  tempo_pipeline_segundos:
+    descricao: "Tempo total esperado do pipeline automático em segundos."
+    alvo: 300
+    bloqueio: 420
+    unidade: "segundos"
+  taxa_falhas_deploy:
+    descricao: "Porcentagem de execuções com falha na etapa de deploy."
+    alvo: 0.02
+    bloqueio: 0.05
+    unidade: "proporcao"
+  tempo_reacao_falhas_horas:
+    descricao: "Janela máxima para iniciar ação corretiva após alerta crítico."
+    alvo: 2
+    bloqueio: 4
+    unidade: "horas"
+coleta:
+  relatórios:
+    - nome: "testes_unitarios"
+      ferramenta: "jest"
+      formato: "junit"
+      comando: "npm run test:unit"
+    - nome: "testes_integrados"
+      ferramenta: "jest"
+      formato: "junit"
+      comando: "npm run test:integracao"
+    - nome: "testes_end_to_end"
+      ferramenta: "playwright"
+      formato: "json"
+      comando: "npm run test:e2e"
+monitoramento:
+  dashboard: "https://monitoramento.exemplo/dashboard/figma-para-vercel"
+  alertas:
+    canal: "#alertas-figma-vercel"
+    ferramenta: "pagerduty"
+    politica: "bloquear-deploy-acima-bloqueio"
