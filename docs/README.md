@@ -5,6 +5,7 @@ Este diretório concentra materiais de apoio que descrevem conceitos, decisões 
 ## Estrutura
 - `configuracao-projetos.md`: guia passo a passo para criar arquivos YAML de configuração de projetos do Figma e respectivos deploys.
 - `issues/`: histórico de issues planejadas ou concluídas, registradas em formato de estudo de caso.
+  - `issue-logs-estruturados.md`: plano para adoção de logs estruturados em JSON no projeto.
 
 ## Boas práticas
 - Escreva sempre em português brasileiro, com foco em instruções objetivas.
