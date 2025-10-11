@@ -1,32 +1,21 @@
 # Issue: Módulo de configuração única para múltiplos projetos Figma
 
+## Status
+Entregue na iteração atual. O módulo está disponível para uso pelos comandos da CLI e pelos demais serviços que precisarem carregar projetos ou tokens de design.
+
 ## Contexto
-O repositório ainda não possui uma forma padronizada de descrever múltiplos projetos Figma. Para viabilizar geração e deploy automatizados, precisamos de um módulo de configuração que centralize as variáveis de ambiente, metadados de projetos e destinos de publicação na Vercel. O README menciona a necessidade de "configurações declarativas", mas não define formato ou estrutura de arquivos.
+A necessidade original era padronizar a descrição de múltiplos projetos do Figma e seus respectivos destinos de deploy. Antes desta entrega, cada desenvolvedor mantinha arquivos soltos, dificultando validações automáticas e a seleção dinâmica de projetos.
 
-## Objetivo
-Criar um módulo de configuração única que permita gerenciar diversos projetos Figma a partir de arquivos declarativos nos formatos `.yaml` ou `.yml`, garantindo que o pipeline futuro possa selecionar dinamicamente qual projeto processar.
+## Resultados alcançados
+- **CarregadorConfiguracoesProjetos** (`src/configuracao/leitor-projetos.ts`): localiza arquivos `config/projetos/*.yaml`, valida a estrutura via esquema Zod e expõe métodos para listar identificadores e carregar uma configuração completa.
+- **CarregadorTokensDesign** (`src/configuracao/carregador-tokens.ts`): centraliza a leitura dos temas declarados em `config/tokens/`, garantindo mensagens de erro amigáveis quando há problemas de validação.
+- **Documentação alinhada**: `docs/configuracao-projetos.md` e o README principal agora explicam como versionar os arquivos e executar a validação automática.
 
-## Escopo sugerido (única tarefa)
-1. Definir esquema de configuração (chaves obrigatórias, tipos, validações) contemplando:
-   - Identificadores de arquivo Figma e tokens de acesso.
-   - Preferências de conversão (por exemplo, biblioteca de componentes, tokens de design).
-   - Metadados de deploy (nome do projeto na Vercel, ambiente, variáveis adicionais).
-2. Implementar leitor de configuração que:
-   - Reconheça automaticamente arquivos `.yaml` ou `.yml` em um diretório padrão (ex.: `config/projetos`).
-   - Forneça API para listar projetos disponíveis e carregar um projeto específico.
-   - Valide contra o esquema definido, emitindo erros claros e em português.
-3. Atualizar documentação (`README.md` ou novo documento em `docs/`) com:
-   - Estrutura de pastas esperada.
-   - Exemplo completo de configuração em YAML, com valores fictícios.
-   - Orientações sobre como adicionar novos projetos e selecionar qual será processado.
+## Evidências
+- `npm run listar:projetos` apresenta a listagem correta a partir do arquivo `config/projetos/exemplo-loja.yaml`.
+- `npm run validar:configuracoes` executa o carregamento completo e impede inconsistências estruturais.
 
-## Critérios de aceitação
-- Leitor de configuração suporta `.yaml` e `.yml` sem necessidade de ajustes manuais.
-- Validação impede chaves ausentes e valores inválidos, com mensagens amigáveis.
-- Documentação descreve o fluxo end-to-end para cadastrar e escolher projetos.
-- Exemplos fornecidos não contêm dados reais sensíveis.
-
-## Riscos e dependências
-- Dependência futura de bibliotecas para parsing de YAML (avaliar `yaml`/`js-yaml`).
-- Necessidade de definir estratégia para armazenar tokens de acesso de forma segura.
-- Integração com pipeline de deploy dependerá de etapas ainda não implementadas.
+## Próximos passos
+1. Expandir `config/figma/indice-prototipos.yaml` com exemplos adicionais para cobrir mais times internos.
+2. Conectar o carregador de tokens ao catálogo em `src/componentes/index.ts`, permitindo gerar temas automaticamente durante o build.
+3. Definir no roadmap uma verificação automática dos limiares descritos em `config/metricas/padroes-qualidade.yaml`.

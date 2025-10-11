@@ -4,6 +4,8 @@ O diretório `config/` abriga arquivos necessários para parametrizar o comporta
 
 ## Estrutura atual
 - `projetos/`: coleção de arquivos YAML que descrevem projetos do Figma e seus destinos na Vercel.
+- `figma/`: índice dos protótipos oficiais com links, responsáveis e status de revisão.
+- `metricas/`: limiares de qualidade e metas de desempenho utilizadas nas rotinas de validação.
 - `tokens/`: temas de design aprovados com paletas, tipografia e espaçamentos consumidos pelo gerador.
 
 ## Convenções
