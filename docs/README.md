@@ -5,6 +5,7 @@ Este diretório concentra materiais de apoio que descrevem conceitos, decisões 
 ## Estrutura
 - `configuracao-projetos.md`: guia passo a passo para criar arquivos YAML de configuração de projetos do Figma e respectivos deploys.
 - `prototipos/guia-prototipos-figma.md`: orientações para produzir os protótipos de referência exigidos no Passo 2 do roadmap.
+- `testes/estrategia-testes-metricas.md`: estratégia do Passo 3, com matriz de testes, métricas e monitoramento contínuo.
 - `issues/`: histórico de issues planejadas ou concluídas, registradas em formato de estudo de caso.
   - `issue-logs-estruturados.md`: plano para adoção de logs estruturados em JSON no projeto.
   - `issue-planejamento-implementacao.md`: consolidação das lacunas, plano de ação e artefatos necessários para a CLI orquestradora e o fluxo de assets.
