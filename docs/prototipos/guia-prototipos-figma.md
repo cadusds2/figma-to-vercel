@@ -8,15 +8,15 @@ Organize os protótipos em um time dedicado do Figma contendo três arquivos pri
 
 1. **Landing institucional**
    - Contém hero, seções de depoimentos e uma grade responsiva de produtos.
-   - Utilize os componentes "banner-destaque", "cartao-produto" e "rodape-resumido" documentados no passo anterior.
+   - Utilize os componentes "Banner de destaque", "Card informativo" e "Botão primário" descritos no catálogo base.
    - Preveja estados de hover e versão mobile em páginas espelhadas.
 2. **Fluxo de conversão com formulário**
    - Inclui páginas para formulário simples, confirmação e estado de erro.
-   - Emprega os componentes "campo-texto", "botao-primario" e "alerta-informativo".
+   - Emprega os componentes "Campo de entrada", "Grupo de campos" e "Botão secundário" para variações de CTA.
    - Adicione variantes com máscaras de entrada e mensagens de validação.
 3. **Biblioteca de componentes dinâmicos**
-   - Agrupa variações de carrossel, acordião e cartões interativos.
-   - Mostra estados ativo/inativo e movimentação automática comentada.
+   - Agrupa variações de "Botão primário", "Botão secundário" e "Card informativo" com interações ricas.
+   - Mostra estados `default`, `hover`, `press`, `focus`, `disabled` e versões selecionadas onde aplicável.
    - Serve como referência isolada para testes unitários do parser.
 
 ## Anotações obrigatórias

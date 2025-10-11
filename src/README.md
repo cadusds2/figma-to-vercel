@@ -5,6 +5,7 @@ O diretório `src/` contém a base de código TypeScript responsável por ler co
 ## Estrutura atual
 - `cli/`: comandos para interação via terminal (listar e validar projetos configurados).
 - `configuracao/`: módulo central de leitura, validação e tratamento de erros das configurações declarativas.
+- `componentes/`: catálogo base de componentes React, com tokens e estilos padronizados reexportados por `src/index.ts` para consumo externo.
 - `index.ts`: ponto de entrada principal para futuras integrações da CLI.
 
 ## Convenções de desenvolvimento

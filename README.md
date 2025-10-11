@@ -35,14 +35,29 @@ Projeto destinado a automatizar a geração e o deploy de sites estáticos na Ve
 figma-to-vercel/
 ├── config/
 │   ├── README.md
+│   ├── figma/
+│   │   └── indice-prototipos.yaml
+│   ├── metricas/
+│   │   └── padroes-qualidade.yaml
 │   ├── projetos/
 │   │   └── exemplo-loja.yaml
 │   └── tokens/
 │       ├── README.md
 │       └── tema-padrao.yaml
 ├── docs/
+│   ├── README.md
 │   ├── componentes/
 │   │   └── base-biblioteca.md
+│   ├── issues/
+│   │   ├── issue-planejamento-implementacao.md
+│   │   ├── plan-passo-1.md
+│   │   ├── plan-passo-2.md
+│   │   ├── plan-passo-3.md
+│   │   └── plan-passo-4.md
+│   ├── prototipos/
+│   │   └── guia-prototipos-figma.md
+│   ├── testes/
+│   │   └── estrategia-testes-metricas.md
 │   └── configuracao-projetos.md
 ├── src/
 │   ├── cli/
