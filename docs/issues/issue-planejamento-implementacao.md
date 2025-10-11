@@ -1,46 +1,56 @@
-# Issue: Planejamento da implementação do pipeline automatizado
+# Issue: Planejamento para início da implementação
 
 ## Contexto
-O projeto precisa de um pipeline orquestrado que conecte importação de dados do Figma, parsing para estruturas intermediárias, geração de código e deploy automatizado na Vercel. Até o momento, os documentos existentes cobrem partes isoladas (como configuração de projetos e planos por passos), mas não consolidam um roteiro único de implementação.
+O repositório já possui um módulo sólido de configuração que oferece leitura, validação e listagem de projetos em arquivos YAML. Há uma CLI inicial para validar essas configurações, mas ainda não existem integrações com a API do Figma nem com a Vercel, tampouco geradores de código. Esta issue documenta as lacunas e os passos necessários para iniciar a fase de implementação do pipeline completo.
 
-## Situação atual
-- Existe um plano em quatro passos descrevendo iniciativas de design, parser, gerador e deploy, porém sem uma camada coordenadora que garanta a execução sequencial.
-- Não há diretrizes centralizadas sobre como baixar, versionar e empacotar assets vindos do Figma (imagens raster, SVG, fontes) antes da geração de código.
-- O fluxo de deploy descrito até agora assume apenas código gerado, sem detalhar como arquivos estáticos serão incorporados ao envio para a Vercel.
+## Avaliação do estado atual
+- ✅ **Configurações declarativas**: esquema Zod consolidado (`src/configuracao/esquema.ts`) e exemplo em `config/projetos/exemplo-loja.yaml`.
+- ✅ **CLI de suporte**: comandos `listar-projetos` e `validar-configuracoes` prontos para uso básico.
+- ⚠️ **Ausência de integração com Figma**: nenhum adaptador HTTP ou cache local de arquivos JSON.
+- ⚠️ **Sem representação intermediária**: não há modelos tipados para nós de design, estilos ou componentes.
+- ⚠️ **Gerador inexistente**: falta o mecanismo que converte a representação intermediária em código Next.js.
+- ⚠️ **Deploy não automatizado**: nenhum script ou integração com a CLI/SDK da Vercel foi criado.
 
-## Lacunas
-1. Falta um comando único de CLI que orquestre todas as etapas do pipeline (importação, parsing, geração e deploy), definindo:
-   - Responsabilidades por etapa (ex.: importação salva respostas brutas da API do Figma; parsing converte para modelos internos; geração cria componentes e manifestos; deploy envia para Vercel).
-   - Parâmetros obrigatórios como `--projeto`, `--token-figma`, `--ambiente` e opções de simulação (`--dry-run`), evitando múltiplas chamadas manuais.
-   - Estratégia de tratamento de erros e logs para cada fase, permitindo rastrear o que falhou.
-2. Inexistência de processo padronizado para download e versionamento de assets do Figma, incluindo:
-   - Local padrão para armazenamento (ex.: `assets/<projeto>/<versao>/` com subpastas `imagens/`, `svg/` e `fontes/`).
-   - Geração de manifesto de assets (JSON ou YAML) com caminhos públicos que serão consumidos pelo gerador de componentes.
-   - Definição de política de versionamento (timestamp ou hash da versão do arquivo Figma) para facilitar rollbacks.
-3. Integração ausente dos assets versionados no fluxo de deploy, o que impede garantir que a Vercel receba todos os recursos necessários junto ao código estático.
+## Lacunas para iniciar a implementação
+### 1. Integração com o Figma
+- Definir estratégia de autenticação usando tokens pessoais ou variáveis de ambiente.
+- Implementar cliente HTTP com tratamento de erros (limites de rate, respostas 403/404).
+- Salvar instantâneos dos JSON recebidos em `docs/` para facilitar depuração.
 
-## Plano de ação
-1. **Desenhar a CLI orquestradora** (tarefa única prioritária):
-   - Definir interface do comando principal `figma-to-vercel executar` responsável por encadear importação → parsing → geração → deploy.
-   - Formalizar em documentação as responsabilidades de cada módulo e os parâmetros aceitos (incluindo variáveis de ambiente opcionais).
-   - Implementar contrato de saída (códigos de retorno e estrutura de logs) para facilitar automação em CI.
-2. **Estabelecer fluxo de assets**:
-   - Criar subcomando `figma-to-vercel assets sincronizar` que faça download dos arquivos raster (PNG/JPEG), vetoriais (SVG) e fontes necessárias, respeitando permissões do Figma.
-   - Armazenar assets em `assets/<projeto>/<versao>/`, gerando manifesto `assets/<projeto>/<versao>/manifesto.json` com metadados (tipo, caminho público, uso previsto).
-   - Atualizar o gerador de componentes para consumir o manifesto, referenciando caminhos relativos que serão copiados para `public/` durante o build.
-   - Registrar processo de limpeza de versões antigas e política mínima de retenção.
-3. **Integrar assets ao deploy Vercel**:
-   - Incluir etapa na CLI que, antes do deploy, sincronize os assets com a pasta `public/` ou outra pasta configurada para saída estática.
-   - Garantir que o comando de deploy receba parâmetros para indicar a versão de assets desejada (`--versao-assets`), permitindo reutilização sem novo download.
-   - Documentar como a pipeline da Vercel (via CLI ou API) deve empacotar esses arquivos, incluindo exemplos de configuração de `vercel.json` se necessário.
+### 2. Modelo de dados e parser
+- Mapear tipos TypeScript para nós relevantes (frames, componentes, textos, imagens).
+- Implementar parser que transforme o JSON bruto em estrutura normalizada.
+- Definir estratégia para tokens de design (cores, tipografia, espaçamentos).
+
+### 3. Gerador de código
+- Escolher biblioteca de estilos padrão (CSS Modules, Tailwind ou styled-components).
+- Criar templates base e motor de geração (ex.: Mustache, Handlebars ou funções próprias).
+- Garantir saída organizada em diretório temporário para posterior deploy.
+
+### 4. Automação de testes e qualidade
+- Configurar Jest/Testing Library para validar parser e gerador.
+- Adicionar linting (ESLint/Prettier) alinhado às convenções do projeto.
+- Definir matriz mínima de testes automatizados para cada iteração.
+
+### 5. Pipeline de deploy na Vercel
+- Preparar integração com a CLI da Vercel (token via variável de ambiente).
+- Automatizar criação/atualização de projetos alvo.
+- Especificar passo a passo de deploy contínuo (incluindo pré-visualizações).
+
+### 6. Governança das configurações
+- Estabelecer convenção para múltiplos ambientes por projeto (produção/homologação).
+- Documentar como segredos serão armazenados (dotenv, GitHub Secrets, Vercel secrets).
+
+## Plano de ação proposto
+1. **Configurar cliente Figma**: criar módulo `src/figma/` com autenticação, download e armazenamento local de JSON.
+2. **Definir modelos intermediários**: adicionar tipos e interfaces em `src/modelo/` para representar nós e estilos.
+3. **Construir parser inicial**: converter frames principais em estrutura intermediária reutilizável.
+4. **Prototipar gerador**: gerar páginas estáticas simples utilizando o modelo intermediário.
+5. **Integrar com Vercel**: script inicial de deploy consumindo o artefato gerado.
+6. **Estabelecer testes automatizados**: criar suites de testes para garantir regressões mínimas.
+7. **Documentar decisões**: atualizar README principal e criar guias específicos em `docs/` a cada avanço.
 
 ## Próximos artefatos necessários
-- Documento técnico detalhando a CLI orquestradora (`docs/cli/orquestradora.md`) com parâmetros, fluxo e exemplos.
-- Especificação do manifesto de assets e processo de sincronização (`docs/assets/fluxo-assets.md`).
-- Guia de integração com deploy na Vercel abordando assets e código (`docs/deploy/fluxo-completo.md`).
-- Atualização do `README.md` com visão resumida do comando principal e referências para os documentos detalhados.
-
-## Métricas de sucesso
-- Execução do comando `figma-to-vercel executar --projeto exemplo --versao-assets atual` completa com logs claros e sem necessidade de etapas manuais intermediárias.
-- Deploys na Vercel passam a incluir assets versionados e referenciados corretamente pelos componentes gerados.
-- Tempo gasto em configurações manuais reduzido significativamente após adoção da CLI orquestradora.
+- Documento de arquitetura detalhando fluxos de dados e responsabilidades entre módulos.
+- Guia de autenticação explicando variáveis de ambiente e gestão de segredos.
+- Exemplos de saída gerada (templates) para orientar contribuições futuras.
