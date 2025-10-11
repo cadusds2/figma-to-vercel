@@ -2,6 +2,11 @@
 
 Este documento consolida os componentes prioritários identificados nos arquivos de design do Figma. A lista abaixo serve como base para o gerador automático de interfaces, descrevendo comportamentos, estados de interação e orientações responsivas que devem ser respeitados durante a implementação.
 
+## Finalidade do catálogo
+- **Para o time de produto:** garante alinhamento entre o que está desenhado no Figma e o que será produzido pelo gerador automático, servindo como contrato visual e funcional.
+- **Para desenvolvimento:** funciona como fonte de verdade dos estados que precisam ser codificados em styled-components e nas histórias de teste, evitando comportamentos divergentes.
+- **Para o gerador automático:** provê a estrutura necessária para mapear os componentes do design, cruzando o nome do componente com os tokens declarados em `config/tokens/tema-padrao.yaml` antes de gerar os arquivos finais.
+
 ## Componentes mapeados
 
 | Componente | Descrição funcional | Estados de interação | Recomendações responsivas |
