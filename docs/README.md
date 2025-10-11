@@ -8,6 +8,7 @@ Este diretório concentra materiais de apoio que descrevem conceitos, decisões 
 - `testes/estrategia-testes-metricas.md`: estratégia do Passo 3, com matriz de testes, métricas e monitoramento contínuo.
 - `issues/`: histórico de issues planejadas ou concluídas, registradas em formato de estudo de caso.
   - `issue-logs-estruturados.md`: plano para adoção de logs estruturados em JSON no projeto.
+  - `issue-planejamento-implementacao.md`: consolidação das lacunas, plano de ação e artefatos necessários para a CLI orquestradora e o fluxo de assets.
 
 ## Boas práticas
 - Escreva sempre em português brasileiro, com foco em instruções objetivas.
