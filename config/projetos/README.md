@@ -8,10 +8,11 @@ O diretório `config/projetos/` concentra descrições declarativas dos projetos
 - Mantenha um arquivo por projeto; identidades duplicadas são rejeitadas pela validação automática.
 
 ## Campos validados
-- `projeto`: identificador único, nome, descrição opcional e etiquetas opcionais.
+- `projeto`: `identificador` único, `nome`, `descricao` opcional e `etiquetas` opcionais.
 - `figma`: `arquivoId`, `tokenLeitura` (placeholder), `bibliotecaComponentes` opcional e `tokensDesign` opcionais.
-- `preferencias.geracao`: estratégia (`isolados` ou `agrupados`), prefixo e lista de páginas a ignorar (todos opcionais).
-- `deploy.vercel`: nome do projeto, ambiente (texto livre), variáveis opcionais e campo opcional `comentarios`.
+- `preferencias.geracao`: `estrategiaComponentes` (`isolados` ou `agrupados`), `prefixoComponentes` e `ignorarPaginas` (todos opcionais).
+- `deploy.vercel`: `projeto`, `ambiente` (texto livre) e `variaveis` opcionais.
+- `deploy.comentarios`: texto opcional para registrar contexto adicional sobre o deploy.
 
 Consulte o guia completo em [`docs/configuracao-projetos.md`](../../docs/configuracao-projetos.md) para exemplos detalhados.
 
