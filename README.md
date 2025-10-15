@@ -88,9 +88,9 @@ figma-to-vercel/
 ## Roadmap e próximos passos
 Os próximos incrementos priorizados estão descritos em [`docs/issues/next_steps.md`](docs/issues/next_steps.md). A etapa atual concentra esforços em:
 
-- Expandir os protótipos de referência no Figma com base no catálogo já consolidado.
-- Iniciar a implementação do parser e do cliente da API do Figma.
-- Estruturar métricas e testes automatizados para acompanhar a qualidade das futuras gerações de código.
+- Detalhar a matriz de testes automatizados cobrindo parser, gerador e deploy contínuo.
+- Definir métricas, limiares de aprovação e indicadores de alerta para monitorar as execuções.
+- Integrar a coleta de métricas e verificações com o pipeline de CI/CD e com o cliente da API do Figma.
 
 ## Licença
 Distribuído sob a licença MIT contida em [`LICENSE`](LICENSE).

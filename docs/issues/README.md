@@ -10,3 +10,6 @@ Este diretório funciona como histórico de decisões, planos e análises estrat
 
 ## Atualizações
 Revise os registros sempre que houver mudanças significativas no escopo ou quando uma entrega for concluída. Mantenha as informações alinhadas ao estado atual do repositório e destaque dependências entre os planos quando surgirem.
+
+### Etapa ativa
+- Prioridade atual: **Passo 3 — Definir estratégia de testes e métricas de sucesso**, conforme detalhado em [`plan-passo-3.md`](./plan-passo-3.md) e na tabela consolidada de [`next_steps.md`](./next_steps.md).
