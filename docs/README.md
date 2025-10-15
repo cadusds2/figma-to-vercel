@@ -6,6 +6,7 @@ O diretório `docs/` reúne guias de configuração, catálogos de componentes, 
 - [`configuracao-projetos.md`](configuracao-projetos.md): passo a passo para criar e validar arquivos YAML em `config/projetos/`.
 - [`componentes/base-biblioteca.md`](componentes/base-biblioteca.md): catálogo consolidado dos componentes e tokens atualmente suportados.
 - [`prototipos/guia-prototipos-figma.md`](prototipos/guia-prototipos-figma.md): orientações para manter protótipos de referência alinhados ao catálogo.
+- [`prototipos/resumo-validacao-passo-2.md`](prototipos/resumo-validacao-passo-2.md): evidências da preparação dos arquivos e validações do Passo 2.
 - [`testes/estrategia-testes-metricas.md`](testes/estrategia-testes-metricas.md): estratégia planejada de validação automática e indicadores de qualidade.
 - [`issues/`](issues/README.md): histórico com planos detalhados, status de iniciativas e recomendações sobre próximos passos.
 
