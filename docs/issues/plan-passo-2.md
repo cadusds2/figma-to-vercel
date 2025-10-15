@@ -21,9 +21,9 @@ Construir um conjunto controlado de arquivos de Figma que cubra os componentes e
 - Acesso a contas do Figma com permissão para criar e compartilhar arquivos.
 
 ## Critérios de aceite
-- Índice de arquivos disponível em `docs/` contendo links, responsáveis e data de atualização. ✅ Evidenciado em [`config/figma/indice-prototipos.yaml`](../../config/figma/indice-prototipos.yaml) e referenciado no [resumo da preparação](../prototipos/resumo-validacao-passo-2.md).
-- Cobertura de pelo menos três tipos de páginas/componentes distintos nos protótipos. ✅ Detalhada na seção de cobertura do [resumo da preparação dos protótipos](../prototipos/resumo-validacao-passo-2.md).
-- Confirmação de que todos os arquivos podem ser acessados via API com o token de serviço. ✅ Validada conforme descrito em [resumo da preparação dos protótipos](../prototipos/resumo-validacao-passo-2.md), com rastreabilidade registrada no [`índice de protótipos`](../../config/figma/indice-prototipos.yaml).
+- ✅ Índice de arquivos disponível em `docs/` contendo links, responsáveis e data de atualização. Evidência direta no [`config/figma/indice-prototipos.yaml`](../../config/figma/indice-prototipos.yaml), referenciado no [resumo da preparação](../prototipos/resumo-validacao-passo-2.md).
+- ✅ Cobertura de pelo menos três tipos de páginas/componentes distintos nos protótipos. Descrita na seção de cobertura do [resumo da preparação dos protótipos](../prototipos/resumo-validacao-passo-2.md).
+- ✅ Confirmação de que todos os arquivos podem ser acessados via API com o token de serviço. Validada conforme registrado no [resumo da preparação dos protótipos](../prototipos/resumo-validacao-passo-2.md) e rastreada no [`índice de protótipos`](../../config/figma/indice-prototipos.yaml).
 
 ## Riscos e mitigação
 - **Risco:** Falta de permissão adequada no Figma.
