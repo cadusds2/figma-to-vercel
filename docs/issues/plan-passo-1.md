@@ -1,12 +1,14 @@
 # Plano do Passo 1: Definir biblioteca base de componentes e estilos
 
+**Status atual:** Concluído. O catálogo consolidado está implementado em [`src/componentes/`](../componentes/base-biblioteca.md) e documentado no guia de componentes. Ajustes futuros devem atualizar simultaneamente o código, o arquivo [`config/tokens/tema-padrao.yaml`](../../config/tokens/tema-padrao.yaml) e este plano.
+
 ## Visão geral
 Estabelecer a base visual e arquitetural dos componentes que serão gerados a partir dos arquivos do Figma, definindo tokens de design, padrões de layout e bibliotecas de estilo preferenciais.
 
 ## Resultados esperados
-- Catálogo inicial de componentes alvo em React/Next.js com suas responsabilidades.
-- Conjunto de tokens de design (cores, tipografia, espaçamento) alinhados ao que será interpretado do Figma.
-- Decisão documentada sobre a tecnologia de estilização (CSS Modules, Tailwind ou styled-components) e diretrizes de uso.
+- Catálogo inicial de componentes alvo em React/Next.js com suas responsabilidades. ✅ Implementado em [`src/componentes/catalogo-base.ts`](../../src/componentes/catalogo-base.ts).
+- Conjunto de tokens de design (cores, tipografia, espaçamento) alinhados ao que será interpretado do Figma. ✅ Disponível em [`config/tokens/tema-padrao.yaml`](../../config/tokens/tema-padrao.yaml).
+- Decisão documentada sobre a tecnologia de estilização (CSS Modules, Tailwind ou styled-components) e diretrizes de uso. ✅ `styled-components` definido como padrão e registrado nos documentos.
 
 ## Atividades principais
 1. Mapear componentes recorrentes nos arquivos de Figma de referência.
@@ -19,9 +21,9 @@ Estabelecer a base visual e arquitetural dos componentes que serão gerados a pa
 - Alinhamento com stakeholders sobre branding e restrições de UI.
 
 ## Critérios de aceite
-- Documento na pasta `docs/` descrevendo componentes e tokens aprovados.
-- Decisão sobre biblioteca de estilos registrada e justificada.
-- Disponibilização de um arquivo de configuração inicial com os tokens.
+- Documento na pasta `docs/` descrevendo componentes e tokens aprovados. ✅ [`docs/componentes/base-biblioteca.md`](../componentes/base-biblioteca.md).
+- Decisão sobre biblioteca de estilos registrada e justificada. ✅ Seção "Comparação de estratégias de estilização".
+- Disponibilização de um arquivo de configuração inicial com os tokens. ✅ [`config/tokens/tema-padrao.yaml`](../../config/tokens/tema-padrao.yaml).
 
 ## Riscos e mitigação
 - **Risco:** Divergência entre designers e desenvolvedores.

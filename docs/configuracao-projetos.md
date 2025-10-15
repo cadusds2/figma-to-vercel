@@ -1,6 +1,6 @@
 # Guia de configuração de projetos Figma
 
-Este módulo permite centralizar as definições de múltiplos projetos Figma em arquivos YAML, facilitando a automação da geração de código e do deploy na Vercel. Todas as configurações residem por padrão em `config/projetos/`.
+Este módulo centraliza as definições de múltiplos projetos Figma em arquivos YAML, facilitando o carregamento por [`CarregadorConfiguracoesProjetos`](../src/configuracao/leitor-projetos.ts) e a execução dos comandos de CLI. Todas as configurações residem por padrão em `config/projetos/`.
 
 ## Estrutura de diretórios
 
@@ -10,7 +10,7 @@ config/
     exemplo-loja.yaml
 ```
 
-Cada arquivo `.yaml` ou `.yml` representa um projeto independente. O nome do arquivo é livre, pois o identificador oficial é lido de `projeto.identificador` dentro do YAML.
+Cada arquivo `.yaml` ou `.yml` representa um projeto independente. O nome do arquivo deve ser descritivo, mas o identificador oficial utilizado pela CLI é lido de `projeto.identificador` dentro do YAML.
 
 ## Campos do arquivo de configuração
 
@@ -53,20 +53,20 @@ deploy:
 
 ### Seção `figma`
 - `arquivoId`: ID do arquivo Figma que será processado.
-- `tokenLeitura`: token de leitura gerado no Figma. Recomenda-se manter o valor real em variáveis de ambiente e referenciar aqui apenas tokens fictícios ou placeholders.
+- `tokenLeitura`: token de leitura gerado no Figma. Recomenda-se manter o valor real em variáveis de ambiente e referenciar aqui apenas tokens fictícios ou placeholders claros.
 - `bibliotecaComponentes`: biblioteca compartilhada, caso exista.
-- `tokensDesign`: lista opcional de tokens de design prioritários.
+- `tokensDesign`: lista opcional de tokens de design prioritários; deve casar com os nomes presentes em `config/tokens/`.
 
 ### Seção `preferencias`
-- `geracao.estrategiaComponentes`: define se os componentes gerados serão `isolados` ou `agrupados`.
-- `geracao.prefixoComponentes`: prefixo para nomes de componentes.
-- `geracao.ignorarPaginas`: páginas do Figma que serão ignoradas durante a importação.
+- `geracao.estrategiaComponentes`: define se os componentes gerados serão `isolados` ou `agrupados`. Caso não seja informado, a estratégia padrão será definida pelo gerador futuro.
+- `geracao.prefixoComponentes`: prefixo opcional para nomes de componentes gerados.
+- `geracao.ignorarPaginas`: páginas do Figma que devem ser ignoradas durante a importação.
 
 ### Seção `deploy`
 - `vercel.projeto`: nome do projeto na Vercel.
 - `vercel.ambiente`: ambiente alvo (ex.: `producao`, `homologacao`, `desenvolvimento`).
-- `vercel.variaveis`: mapa opcional de variáveis de ambiente adicionais.
-- `comentarios`: observações livres sobre o fluxo de deploy.
+- `vercel.variaveis`: mapa opcional de variáveis de ambiente adicionais. Utilize apenas valores fictícios.
+- `comentarios`: observações livres sobre o fluxo de deploy ou particularidades do ambiente.
 
 ## Uso via CLI
 
@@ -88,4 +88,4 @@ npm run validar:configuracoes
 3. Atualize variáveis sensíveis por meio de arquivos `.env` ou segredos da Vercel; não salve tokens reais no repositório.
 4. Execute `npm run validar:configuracoes` para garantir que a configuração esteja correta.
 
-Após estes passos, o pipeline poderá selecionar o projeto desejado informando o `identificador` ao executar a geração ou o deploy.
+Após estes passos, a CLI exibirá o projeto quando `npm run listar:projetos` for executado. Os módulos restantes do pipeline utilizarão o mesmo identificador para localizar o arquivo correspondente.

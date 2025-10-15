@@ -1,12 +1,26 @@
 # Comandos de linha de comando
 
-O diretório `src/cli/` concentra scripts executados via linha de comando para interagir com o módulo de configuração e, futuramente, com outras etapas do pipeline.
+O diretório `src/cli/` concentra scripts executados via terminal para interagir com as configurações versionadas no repositório.
 
-## Comandos atuais
-- `listar-projetos.ts`: apresenta os projetos disponíveis na pasta `config/projetos/` com suas descrições.
-- `validar-configuracoes.ts`: verifica se todos os arquivos YAML estão de acordo com o esquema definido.
+## Comandos disponíveis
+- `listar-projetos.ts`: apresenta os projetos disponíveis em `config/projetos/` exibindo identificador, nome e destino na Vercel.
+- `validar-configuracoes.ts`: valida todos os arquivos YAML conforme o esquema e informa eventuais erros estruturais.
+
+### Execução
+Após instalar as dependências (`npm install`), utilize os scripts de `package.json`:
+
+```bash
+npm run listar:projetos
+npm run validar:configuracoes
+```
+
+Também é possível executar diretamente com `ts-node`:
+
+```bash
+npx ts-node src/cli/listar-projetos.ts
+```
 
 ## Recomendações
-- Implemente comandos com mensagens claras para usuários que operam a partir do terminal.
-- Mantenha a interface consistente, utilizando argumentos e opções padronizadas.
-- Garanta tratamento de erros informativo e em português brasileiro.
+- Escreva mensagens claras e em português brasileiro, sempre indicando como corrigir inconsistências.
+- Padronize argumentos e opções quando novos comandos forem adicionados.
+- Evite duplicar lógica; reutilize os carregadores disponíveis em `src/configuracao/`.

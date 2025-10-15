@@ -9,7 +9,7 @@ A necessidade original era padronizar a descrição de múltiplos projetos do Fi
 ## Resultados alcançados
 - **CarregadorConfiguracoesProjetos** (`src/configuracao/leitor-projetos.ts`): localiza arquivos `config/projetos/*.yaml`, valida a estrutura via esquema Zod e expõe métodos para listar identificadores e carregar uma configuração completa.
 - **CarregadorTokensDesign** (`src/configuracao/carregador-tokens.ts`): centraliza a leitura dos temas declarados em `config/tokens/`, garantindo mensagens de erro amigáveis quando há problemas de validação.
-- **Documentação alinhada**: `docs/configuracao-projetos.md` e o README principal agora explicam como versionar os arquivos e executar a validação automática.
+- **Documentação alinhada**: `docs/configuracao-projetos.md`, `config/README.md` e o README principal explicam como versionar os arquivos e executar a validação automática.
 
 ## Evidências
 - `npm run listar:projetos` apresenta a listagem correta a partir do arquivo `config/projetos/exemplo-loja.yaml`.

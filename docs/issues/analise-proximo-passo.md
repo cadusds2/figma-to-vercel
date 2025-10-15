@@ -9,12 +9,10 @@ Foi solicitado revisar a documentação disponível para identificar qual deve s
 - [`docs/issues/issue-planejamento-implementacao.md`](./issue-planejamento-implementacao.md): visão geral das lacunas atuais, incluindo a integração futura com a API do Figma.
 
 ## Análise
-A priorização atual (Next Steps) indica como primeiro passo a **definição da biblioteca base de componentes e estilos**, que envolve consolidar tokens de design, componentes alvo e a tecnologia padrão de estilização. O plano correspondente (Passo 1) detalha atividades como mapear componentes recorrentes, selecionar a abordagem de estilos e documentar diretrizes de composição.
-
-Embora a integração com a API do Figma seja essencial e apareça como primeira ação dentro do plano amplo de implementação do pipeline, ela depende de termos uma base consistente de componentes e tokens para guiar o parser e o gerador. Portanto, a próxima tarefa recomendada continua sendo a execução completa do Passo 1, pois ele fornece os insumos necessários para que a comunicação com a API resulte em dados utilizáveis pelo restante do fluxo.
+A priorização atual (Next Steps) aponta como ação imediata a **preparação dos arquivos de Figma de referência**. O Passo 1 foi concluído e já fornece catálogo de componentes e tokens. Para avançar com o parser e o cliente da API do Figma, é indispensável ter protótipos atualizados refletindo o catálogo. O plano do Passo 2 detalha como estruturar os arquivos, quais páginas cobrir e como manter o índice versionado.
 
 ## Conclusão
-- **Próxima implementação prioritária:** concluir o Passo 1, definindo a biblioteca base de componentes e estilos conforme descrito no planejamento específico.
-- **Dependência imediata:** utilizar o resultado do Passo 1 como referência para, na sequência, iniciar a implementação do cliente da API do Figma e dos demais módulos descritos na issue de planejamento.
+- **Próxima implementação prioritária:** executar o Passo 2 criando/atualizando os protótipos descritos e mantendo o índice em `config/figma/indice-prototipos.yaml` alinhado.
+- **Dependência imediata:** após concluir o Passo 2, iniciar a implementação do cliente da API do Figma e evoluir para a etapa de testes do Passo 3.
 
-Seguir essa ordem garante que, ao começar a integração com o Figma, já teremos padrões visuais e arquiteturais claros, reduzindo retrabalho no parser e no gerador.
+Seguir essa ordem garante que, ao iniciar a automação de parser e geração, já existam protótipos consistentes com o catálogo e tokens aprovados.
