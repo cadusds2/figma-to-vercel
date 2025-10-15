@@ -47,15 +47,15 @@ Mantenha os valores fictícios para evitar exposição de dados sensíveis. Util
 | `escopo` | Sintetizar as principais seções ou fluxos cobertos. | Lista de textos. | Utilize itens curtos que orientem o time sobre a cobertura do protótipo. |
 | `observacoes` | Descrever anotações gerais úteis para a automação. | Texto livre. | Centralize premissas e limitações que impactam o parser. |
 | `notas_validacao` | Registrar verificações concluídas antes de liberar o protótipo. | Lista de textos. | Use frases curtas que indiquem responsável, escopo e data fictícia da validação. |
-| `configuracao_api` | Reunir os dados mínimos para o parser autenticar e consultar o arquivo. | Objeto com subcampos específicos. | Preencha somente com valores fictícios que representem o fluxo real. |
+| `configuracao_api` | Reunir os dados mínimos para o parser autenticar e consultar o arquivo. | Objeto com subcampos específicos. | Preencha somente com valores fictícios que representem o fluxo real e mantenha-os em sincronia com o YAML. |
 
-O campo `notas_validacao` deve conter uma lista organizada em ordem cronológica com as verificações já realizadas. Utilize sentenças objetivas que deixem claro quem validou, qual aspecto foi avaliado e quando, sempre com datas e nomes fictícios.
+O campo `notas_validacao` deve conter uma lista organizada em ordem cronológica com as verificações já realizadas. Utilize sentenças objetivas que deixem claro quem validou, qual aspecto foi avaliado e quando, sempre com datas e nomes fictícios iguais ou equivalentes aos registrados em [`config/figma/indice-prototipos.yaml`](../../config/figma/indice-prototipos.yaml).
 
-O objeto `configuracao_api` agrega os subcampos necessários para testar a autenticação do serviço:
+O objeto `configuracao_api` agrega os subcampos necessários para testar a autenticação do serviço. Todos os valores devem permanecer fictícios para evitar a exposição de credenciais reais:
 
-- `token_servico`: cadeia de texto que representa o identificador do token usado pela CLI para acessar o arquivo. Use um apelido fictício com o padrão interno, sem revelar credenciais reais.
-- `permissao`: texto curto indicando o nível de acesso concedido ao token (por exemplo, apenas leitura). Escolha um valor que reflita o comportamento esperado pelo pipeline.
-- `verificado_em`: data no formato `AAAA-MM-DD` informando quando a permissão fictícia foi checada pela última vez. Atualize sempre que revisar o token de serviço.
+- `token_servico`: cadeia de texto curta usada pela CLI para identificar o token de acesso. Prefira um apelido fictício que siga o padrão interno (`svc-...`) e evite copiar qualquer token verdadeiro.
+- `permissao`: texto curto que descreve o nível de acesso concedido ao token (por exemplo, `leitura`). Garanta que a escolha corresponda ao comportamento esperado no YAML e nunca informe permissões confidenciais reais.
+- `verificado_em`: data no formato `AAAA-MM-DD` que indica quando a permissão fictícia foi conferida pela última vez. Mantenha a data alinhada ao índice YAML e atualize-a sempre que a revisão simulada for repetida.
 
 ## Próximos passos
 1. Criar os arquivos no Figma seguindo a estrutura descrita.
