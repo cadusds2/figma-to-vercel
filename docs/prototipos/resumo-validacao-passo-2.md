@@ -19,7 +19,8 @@
 
 ## Confirmação de acesso via API
 - Token de serviço configurado: `svc-parser-figma` com permissão somente leitura.
-- Teste manual de `GET /v1/files/{file_key}` executado utilizando `ts-node scripts/figma/testar-acesso.ts` (token mascarado localmente) retornou status 200 para os três arquivos.
+- Teste manual de `GET /v1/files/{file_key}` executado via `curl` (token mascarado localmente) retornou status 200 para os três arquivos, confirmando a leitura de metadados e versões vigentes.
+- Automação dessa verificação permanece pendente e está registrada na issue ["Planejamento para início da implementação"](../issues/issue-planejamento-implementacao.md), que abrange a criação do cliente HTTP do Figma.
 - As datas de verificação de acesso foram atualizadas no arquivo [`config/figma/indice-prototipos.yaml`](../../config/figma/indice-prototipos.yaml) para rastreabilidade.
 
 ## Próximos passos sugeridos
