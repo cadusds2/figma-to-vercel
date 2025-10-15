@@ -1,6 +1,6 @@
 # Próximos passos priorizados
 
-A tabela abaixo resume as iniciativas prioritárias. Cada linha representa uma tarefa abrangente que deve ser executada de ponta a ponta, mantendo o repositório e a documentação sincronizados.
+A tabela abaixo resume as iniciativas prioritárias. Cada linha representa uma tarefa abrangente que deve ser executada de ponta a ponta, mantendo o repositório e a documentação sincronizados. A prioridade ativa neste momento é o **Passo 3**, responsável por estruturar testes e métricas operacionais.
 
 | Prioridade | Passo | Resumo | Status | Planejamento |
 |------------|-------|--------|--------|--------------|

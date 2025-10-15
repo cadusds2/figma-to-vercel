@@ -86,11 +86,13 @@ figma-to-vercel/
 - [`docs/issues/`](docs/issues/README.md): reúne planos de iteração, decisões e análises que guiam a evolução do projeto.
 
 ## Roadmap e próximos passos
-Os próximos incrementos priorizados estão descritos em [`docs/issues/next_steps.md`](docs/issues/next_steps.md). A etapa atual concentra esforços em:
+Os próximos incrementos priorizados estão descritos em [`docs/issues/next_steps.md`](docs/issues/next_steps.md). O projeto está atualmente dedicado ao **Passo 3 — estratégia de testes e métricas**, com as seguintes frentes principais:
 
-- Detalhar a matriz de testes automatizados cobrindo parser, gerador e deploy contínuo.
-- Definir métricas, limiares de aprovação e indicadores de alerta para monitorar as execuções.
-- Integrar a coleta de métricas e verificações com o pipeline de CI/CD e com o cliente da API do Figma.
+- Detalhar e implementar suites automatizadas cobrindo parser, gerador e fluxos de deploy contínuo.
+- Automatizar a coleta de métricas, definindo limiares de aprovação e indicadores de alerta vinculados ao pipeline de CI/CD.
+- Instrumentar o cliente da API do Figma para registrar evidências de execução e alimentar dashboards de acompanhamento.
+
+As entregas dos Passos 1 e 2 permanecem como base, garantindo tokens validados e protótipos versionados para suportar os cenários de teste planejados.
 
 ## Licença
 Distribuído sob a licença MIT contida em [`LICENSE`](LICENSE).

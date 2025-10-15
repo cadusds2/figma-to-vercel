@@ -1,6 +1,6 @@
 # Plano do Passo 3: Definir estratégia de testes e métricas de sucesso
 
-**Status atual:** Planejado. Os limiares estão descritos em [`config/metricas/padroes-qualidade.yaml`](../../config/metricas/padroes-qualidade.yaml) e a estratégia geral está documentada em [`docs/testes/estrategia-testes-metricas.md`](../testes/estrategia-testes-metricas.md), mas os scripts de teste e a automação de coleta ainda precisam ser desenvolvidos.
+**Status atual:** Em andamento. A estratégia macro está registrada em [`docs/testes/estrategia-testes-metricas.md`](../testes/estrategia-testes-metricas.md) e os limiares iniciais constam em [`config/metricas/padroes-qualidade.yaml`](../../config/metricas/padroes-qualidade.yaml); resta implementar os scripts de teste e automatizar a coleta contínua das métricas.
 
 ## Visão geral
 Estabelecer os critérios objetivos para validar a geração de código e o deploy, descrevendo testes automatizados, métricas de cobertura de componentes e indicadores de desempenho.

@@ -1,7 +1,7 @@
 # Issue: Análise do próximo passo de implementação
 
 ## Contexto
-Foi solicitado revisar a documentação disponível para identificar qual deve ser a próxima implementação prioritária no projeto **Figma para Vercel**.
+Com a finalização do Passo 2 e a consolidação dos protótipos de referência, foi solicitado revisar a documentação disponível para confirmar qual iniciativa deve receber dedicação imediata no projeto **Figma para Vercel**.
 
 ## Referências consultadas
 - [`docs/issues/next_steps.md`](./next_steps.md): tabela de priorização das iniciativas planejadas.
@@ -11,10 +11,11 @@ Foi solicitado revisar a documentação disponível para identificar qual deve s
 - [`docs/issues/issue-planejamento-implementacao.md`](./issue-planejamento-implementacao.md): visão geral das lacunas atuais, incluindo a integração futura com a API do Figma.
 
 ## Análise
-A tabela de priorização aponta agora o **Passo 3 (testes e métricas)** como iniciativa de maior prioridade. O Passo 2 está concluído, entregando protótipos cobertos pelos três cenários principais e validações de acesso via API, conforme registrado no resumo de validação e no índice versionado. Com esses artefatos disponíveis, é possível iniciar a consolidação dos roteiros de teste e a definição das métricas operacionais descritas no plano do Passo 3.
+A tabela de priorização destaca o **Passo 3 (testes e métricas)** como prioridade ativa, indicando que a próxima entrega deve focar na definição detalhada dos roteiros de teste, métricas operacionais e integrações necessárias para monitoramento. A documentação do Passo 2 comprova que os protótipos foram revisados, cobrem os três cenários essenciais e estão acessíveis via API, eliminando dependências pendentes para iniciar os trabalhos de QA. Além disso, o plano do Passo 3 já apresenta diretrizes sobre limiares e estrutura de documentação, restando implementar scripts, pipelines e mecanismos de acompanhamento contínuo.
 
 ## Conclusão
-- **Próxima implementação prioritária:** executar o Passo 3 detalhando testes automatizados, métricas e critérios de sucesso, conforme descrito no plano específico.
-- **Dependências atualizadas:** utilizar os protótipos consolidados no Passo 2 (listados no índice versionado) e os tokens do Passo 1 como base para criar cenários de teste; alinhar com a issue de planejamento da implementação para orquestrar o desenvolvimento do cliente da API do Figma e das automações necessárias.
+- **Foco atual:** executar o Passo 3, convertendo a estratégia documentada em suites de teste automatizadas, métricas rastreáveis e gatilhos de aprovação/reprovação no pipeline.
+- **Ações imediatas:** priorizar a implementação dos scripts descritos no plano do Passo 3, conectando-os aos protótipos consolidados no Passo 2 e aos tokens definidos no Passo 1.
+- **Coordenação necessária:** manter alinhamento com a issue de planejamento da implementação para garantir que a instrumentação do cliente da API do Figma e as integrações de monitoramento avancem em paralelo.
 
-Seguir essa ordem garante que, ao automatizar parser, geração e deploy, os protótipos e tokens aprovados estejam cobertos por testes monitoráveis.
+Essa priorização garante que, ao evoluir parser, geração e deploy, cada entrega seja avaliada por testes monitorados e por indicadores claros de sucesso.
