@@ -19,8 +19,10 @@
 
 ## Confirmação de acesso via API
 - Token de serviço configurado: `svc-parser-figma` com permissão somente leitura.
-- Teste manual de `GET /v1/files/{file_key}` executado via `curl` (token mascarado localmente) retornou status 200 para os três arquivos, confirmando a leitura de metadados e versões vigentes.
+- Teste manual de `GET /v1/files/{file_key}` executado via `curl` com o comando `curl -H "X-Figma-Token: $FIGMA_TOKEN" https://api.figma.com/v1/files/LANDING-PASSO2-202405` (token mascarado localmente) retornou status 200 para os três arquivos, confirmando a leitura de metadados e versões vigentes.
+- Para os demais arquivos repetiu-se o procedimento ajustando apenas o `file_key`, garantindo a verificação de `FORM-PASSO2-202405` e `DINAMICO-PASSO2-202405` na mesma sessão.
 - Automação dessa verificação permanece pendente e está registrada na issue ["Planejamento para início da implementação"](../issues/issue-planejamento-implementacao.md), que abrange a criação do cliente HTTP do Figma.
+- A tarefa derivada para agendar esse teste na esteira de CI está anotada como pendência adicional na mesma issue, aguardando definição do executor responsável.
 - As datas de verificação de acesso foram atualizadas no arquivo [`config/figma/indice-prototipos.yaml`](../../config/figma/indice-prototipos.yaml) para rastreabilidade.
 
 ## Próximos passos sugeridos
