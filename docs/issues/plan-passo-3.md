@@ -1,5 +1,7 @@
 # Plano do Passo 3: Definir estratégia de testes e métricas de sucesso
 
+**Status atual:** Planejado. Os limiares estão descritos em [`config/metricas/padroes-qualidade.yaml`](../../config/metricas/padroes-qualidade.yaml) e a estratégia geral está documentada em [`docs/testes/estrategia-testes-metricas.md`](../testes/estrategia-testes-metricas.md), mas os scripts de teste e a automação de coleta ainda precisam ser desenvolvidos.
+
 ## Visão geral
 Estabelecer os critérios objetivos para validar a geração de código e o deploy, descrevendo testes automatizados, métricas de cobertura de componentes e indicadores de desempenho.
 
@@ -19,9 +21,9 @@ Estabelecer os critérios objetivos para validar a geração de código e o depl
 - Acesso à infraestrutura de CI/CD e ferramentas de monitoramento selecionadas.
 
 ## Critérios de aceite
-- Documento em `docs/` com matriz de testes, métricas e critérios de sucesso aprovados pelo time.
-- Backlog de casos de teste criado (pode ser em ferramenta externa) com prioridades claras.
-- Definição de limiares iniciais para aprovar ou barrar deploys automáticos.
+- Documento em `docs/` com matriz de testes, métricas e critérios de sucesso aprovados pelo time. ✅ [`docs/testes/estrategia-testes-metricas.md`](../testes/estrategia-testes-metricas.md).
+- Backlog de casos de teste criado (pode ser em ferramenta externa) com prioridades claras. ⏳ Pendência para a etapa operacional do Passo 4.
+- Definição de limiares iniciais para aprovar ou barrar deploys automáticos. ✅ [`config/metricas/padroes-qualidade.yaml`](../../config/metricas/padroes-qualidade.yaml).
 
 ## Riscos e mitigação
 - **Risco:** Métricas difíceis de coletar automaticamente.

@@ -1,5 +1,7 @@
 # Plano do Passo 4: Montar backlog e operacionalizar o roadmap
 
+**Status atual:** Planejado. Depende da conclusão parcial dos passos 2 e 3 para ter insumos suficientes para criação do backlog.
+
 ## Visão geral
 Transformar as decisões e artefatos dos passos anteriores em um backlog estruturado, priorizando entregas e garantindo rastreabilidade em ferramentas de gestão.
 
@@ -19,9 +21,9 @@ Transformar as decisões e artefatos dos passos anteriores em um backlog estrutu
 - Acesso à ferramenta de gestão escolhida e permissão para criar projetos.
 
 ## Critérios de aceite
-- Backlog publicado contendo, no mínimo, os épicos relacionados à base de componentes, parser, gerador e deploy.
-- Definição documentada de política de governança (como priorizar, quando revisar, quem aprova mudanças).
-- Integração entre o quadro e o repositório (ex.: links de issues e PRs) validada com um exemplo.
+- Backlog publicado contendo, no mínimo, os épicos relacionados à base de componentes, parser, gerador e deploy. ⏳ Aguardando definição do quadro.
+- Definição documentada de política de governança (como priorizar, quando revisar, quem aprova mudanças). ⏳ A ser produzida junto com a criação do backlog.
+- Integração entre o quadro e o repositório (ex.: links de issues e PRs) validada com um exemplo. ⏳ Depende da escolha da ferramenta e da criação das primeiras issues.
 
 ## Riscos e mitigação
 - **Risco:** Backlog ficar desatualizado por falta de responsáveis.

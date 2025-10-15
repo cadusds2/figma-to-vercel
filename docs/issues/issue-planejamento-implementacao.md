@@ -6,8 +6,9 @@ O repositório já possui um módulo sólido de configuração que oferece leitu
 ## Avaliação do estado atual
 - ✅ **Configurações declarativas**: esquema Zod consolidado (`src/configuracao/esquema.ts`) e exemplo em `config/projetos/exemplo-loja.yaml`.
 - ✅ **CLI de suporte**: comandos `listar-projetos` e `validar-configuracoes` prontos para uso básico.
+- ✅ **Catálogo de componentes e tokens**: catálogo base em `src/componentes/` e tokens oficiais em `config/tokens/tema-padrao.yaml`.
 - ⚠️ **Ausência de integração com Figma**: nenhum adaptador HTTP ou cache local de arquivos JSON.
-- ⚠️ **Sem representação intermediária**: não há modelos tipados para nós de design, estilos ou componentes.
+- ⚠️ **Sem representação intermediária**: não há modelos tipados para nós de design além do catálogo base.
 - ⚠️ **Gerador inexistente**: falta o mecanismo que converte a representação intermediária em código Next.js.
 - ⚠️ **Deploy não automatizado**: nenhum script ou integração com a CLI/SDK da Vercel foi criado.
 
@@ -48,7 +49,7 @@ O repositório já possui um módulo sólido de configuração que oferece leitu
 4. **Prototipar gerador**: gerar páginas estáticas simples utilizando o modelo intermediário.
 5. **Integrar com Vercel**: script inicial de deploy consumindo o artefato gerado.
 6. **Estabelecer testes automatizados**: criar suites de testes para garantir regressões mínimas.
-7. **Documentar decisões**: atualizar README principal e criar guias específicos em `docs/` a cada avanço.
+7. **Documentar decisões**: atualizar README principal e criar guias específicos em `docs/` a cada avanço (manter `docs/issues/next_steps.md` sincronizado com o status real).
 
 ## Próximos artefatos necessários
 - Documento de arquitetura detalhando fluxos de dados e responsabilidades entre módulos.

@@ -30,9 +30,9 @@ Organize os protótipos em um time dedicado do Figma contendo três arquivos pri
 - Planeje revisões quinzenais para incorporar feedback de produto e marketing.
 
 ## Índice e rastreabilidade
-Mantenha o arquivo `config/figma/indice-prototipos.yaml` como fonte da verdade com links e metadados dos protótipos. O gerador automático deve ler esse arquivo para obter o `file_key` de cada protótipo antes de acionar a API do Figma.
+O arquivo [`config/figma/indice-prototipos.yaml`](../../config/figma/indice-prototipos.yaml) já contém três protótipos de referência com identificadores, links, responsáveis e escopo resumido. Atualize-o sempre que um novo arquivo for criado ou revisado. O gerador automático utilizará esse índice para obter o `file_key` de cada protótipo antes de acionar a API do Figma.
 
 ## Próximos passos
 1. Criar os arquivos no Figma seguindo a estrutura descrita.
 2. Preencher o índice YAML com dados fictícios representando os protótipos e responsáveis.
-3. Validar manualmente o acesso via token de serviço antes de prosseguir para a automação.
+3. Validar manualmente o acesso via token de serviço antes de prosseguir para a automação (utilize placeholders enquanto a autenticação não for automatizada).

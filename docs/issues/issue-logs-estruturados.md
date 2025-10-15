@@ -1,5 +1,7 @@
 # Issue: Implementação de logs estruturados em JSON
 
+**Status atual:** Planejado. Ainda não há utilitário de logging; esta issue serve como guia para a futura implementação.
+
 ## Contexto
 Atualmente o projeto não possui um sistema de observabilidade padronizado, dificultando o rastreamento de eventos e a detecção rápida de falhas. A adoção de logs estruturados permitirá inspeção mais precisa dos fluxos executados, além de facilitar integrações com plataformas de monitoramento.
 

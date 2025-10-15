@@ -1,11 +1,16 @@
 # Temas de tokens de design
 
-Os arquivos deste diretório consolidam os tokens de cores, tipografia e espaçamentos que alimentam o gerador e os componentes base descritos no Passo 1. Cada arquivo deve ser escrito em YAML, utilizando nomes equivalentes aos estilos publicados no Figma para preservar o vínculo entre as fontes.
+Este diretório armazena os arquivos YAML consumidos pelo `CarregadorTokensDesign`. Eles descrevem paletas de cores, tipografia e espaçamentos necessários para montar o tema utilizado pelos componentes base em `src/componentes/`.
 
-## Como utilizar
-- Alimente o gerador com `CarregadorTokensDesign`, apontando o nome do arquivo sem extensão (por exemplo, `tema-padrao`).
-- Garanta que cada bloco (`cores`, `tipografia`, `espacamentos`) esteja presente e siga o esquema definido em `src/configuracao/esquema.ts`.
-- Ao ajustar algum valor, sincronize a mudança com o catálogo de componentes para evitar divergências de estados.
+## Estrutura obrigatória
+- `cores`: contém blocos `primarias`, `neutras` e `feedback`, todos com chaves obrigatórias validadas em [`src/configuracao/esquema.ts`](../../src/configuracao/esquema.ts).
+- `tipografia`: reúne família, pesos, tamanhos e alturas de linha utilizados pelos componentes.
+- `espacamentos`: define escalas compacta/confortável e parâmetros da grade responsiva.
 
-## Exemplo disponível
-- `tema-padrao.yaml`: tokens oficiais da biblioteca base utilizados pelos componentes prioritários.
+## Como usar
+1. Salve o arquivo em YAML com indentação de dois espaços e nome significativo (ex.: `tema-padrao.yaml`).
+2. Execute `CarregadorTokensDesign.listarTemasDisponiveis()` para conferir se o tema foi reconhecido.
+3. Carregue o tema com `CarregadorTokensDesign.carregarTema('tema-padrao')` e entregue o resultado para `montarTemaBase` em [`src/componentes/tema-styled.ts`](../../src/componentes/tema-styled.ts).
+
+## Exemplos
+- [`tema-padrao.yaml`](tema-padrao.yaml): tokens oficiais usados pelo catálogo atual de componentes.

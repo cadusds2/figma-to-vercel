@@ -1,16 +1,22 @@
 # Projetos configurados
 
-O diretório `config/projetos/` reúne arquivos YAML que descrevem cada projeto Figma integrado ao pipeline. Cada arquivo contém identificadores do Figma, parâmetros de geração e informações do deploy na Vercel.
+O diretório `config/projetos/` concentra descrições declarativas dos projetos monitorados pela CLI. Os arquivos são validados por [`CarregadorConfiguracoesProjetos`](../../src/configuracao/leitor-projetos.ts) utilizando o esquema definido em [`src/configuracao/esquema.ts`](../../src/configuracao/esquema.ts).
 
-## Como organizar
-- Crie um arquivo por projeto usando o padrão `nome-do-projeto.yaml` ou `.yml`.
-- Garanta que o bloco `projeto.` contenha `projeto.identificador`, `projeto.nome`, `projeto.descricao` e, quando necessário, `projeto.etiquetas` para facilitar filtros na CLI.
-- Preencha `figma.arquivoId`, `figma.tokenLeitura`, `figma.bibliotecaComponentes` e `figma.tokensDesign` com valores fictícios que representem o cenário alvo.
-- Defina `deploy.vercel.projeto`, `deploy.vercel.ambiente` e `deploy.vercel.variaveis` para indicar como o gerador publicará cada build.
-- Versione apenas dados fictícios ou que possam ser compartilhados publicamente.
+## Organização
+- Utilize nomes em minúsculas separados por hífens (ex.: `loja-virtual.yaml`).
+- Armazene apenas dados fictícios e comentários indispensáveis para explicar decisões.
+- Mantenha um arquivo por projeto; identidades duplicadas são rejeitadas pela validação automática.
 
-## Passos recomendados
-1. Duplique um arquivo de exemplo (como `exemplo-loja.yaml`).
-2. Atualize os campos `projeto.identificador` e `figma.arquivoId` para representar o novo protótipo.
-3. Ajuste `deploy.vercel.*` conforme o ambiente fictício desejado, mantendo variáveis de ambiente exemplificativas.
-4. Execute `npm run validar:configuracoes` para garantir conformidade antes de abrir um PR.
+## Campos validados
+- `projeto`: identificador único, nome, descrição opcional e etiquetas opcionais.
+- `figma`: `arquivoId`, `tokenLeitura` (placeholder), `bibliotecaComponentes` opcional e `tokensDesign` opcionais.
+- `preferencias.geracao`: estratégia (`isolados` ou `agrupados`), prefixo e lista de páginas a ignorar (todos opcionais).
+- `deploy.vercel`: nome do projeto, ambiente (texto livre), variáveis opcionais e campo opcional `comentarios`.
+
+Consulte o guia completo em [`docs/configuracao-projetos.md`](../../docs/configuracao-projetos.md) para exemplos detalhados.
+
+## Fluxo sugerido
+1. Copie [`exemplo-loja.yaml`](exemplo-loja.yaml) e renomeie com o identificador desejado.
+2. Ajuste os blocos `projeto` e `figma` com dados fictícios alinhados aos protótipos listados em `config/figma/indice-prototipos.yaml`.
+3. Configure `deploy.vercel` indicando o projeto e ambiente da Vercel que receberão o código gerado.
+4. Execute `npm run validar:configuracoes` para garantir que o arquivo respeita o esquema e que não existem identificadores duplicados.

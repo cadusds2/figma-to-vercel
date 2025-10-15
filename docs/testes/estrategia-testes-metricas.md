@@ -20,7 +20,7 @@ Este guia consolida as decisões do Passo 3 do roadmap descrito em [`docs/issues
 3. Consolidar fluxos end-to-end apenas após a estabilização das camadas internas, reaproveitando dados fictícios já versionados.
 
 ## Métricas e limiares
-Os limiares abaixo estão catalogados em [`config/metricas/padroes-qualidade.yaml`](../../config/metricas/padroes-qualidade.yaml) para consumo por scripts de observabilidade.
+Os limiares abaixo estão catalogados em [`config/metricas/padroes-qualidade.yaml`](../../config/metricas/padroes-qualidade.yaml) para consumo por scripts de observabilidade. Os comandos citados naquele arquivo (`npm run test:unit`, `npm run test:integracao`, `npm run test:e2e`) ainda não foram implementados na CLI; trate-os como placeholders ao construir o pipeline.
 
 - **Cobertura de componentes automatizados:** mínimo aceitável de 85% do catálogo suportado (bloqueio abaixo de 70%).
 - **Tempo total do pipeline automático:** alvo de até 5 minutos, com bloqueio acima de 7 minutos.
@@ -28,7 +28,7 @@ Os limiares abaixo estão catalogados em [`config/metricas/padroes-qualidade.yam
 - **Tempo de reação a falhas críticas:** abrir correção em até 4 horas úteis após o alerta, com plano de contingência documentado.
 
 ## Coleta e monitoramento
-- Registrar a execução dos testes unitários e de integração com relatórios JUnit exportados pelo Jest.
+- Registrar a execução dos testes unitários e de integração com relatórios JUnit exportados pelo Jest assim que os scripts estiverem disponíveis.
 - Consolidar resultados de Playwright e da CLI da Vercel em relatórios JSON interpretados pelo pipeline de CI.
 - Enviar métricas para dashboard compartilhado (por exemplo, Data Studio ou Grafana) alimentado por scripts que consomem os relatórios padronizados.
 - Configurar alertas automáticos quando algum limiar do arquivo de métricas for violado, notificando o time em canal dedicado.

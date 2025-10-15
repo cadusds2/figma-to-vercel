@@ -9,6 +9,8 @@ Este documento consolida os componentes prioritários identificados nos arquivos
 
 ## Componentes mapeados
 
+A tabela abaixo representa exatamente o conteúdo exportado por [`catalogoBaseComponentes`](../../src/componentes/catalogo-base.ts) e acessível via `listarCatalogoBase()`:
+
 | Componente | Descrição funcional | Estados de interação | Recomendações responsivas |
 | --- | --- | --- | --- |
 | Botão primário | Ação principal em formulários e chamadas diretas. | `default`, `hover`, `press`, `focus` com realce da borda e `disabled` com opacidade reduzida. | Largura mínima de 48px, preenchimento horizontal proporcional ao ponto de quebra (8px em mobile, 12px em desktop). |
@@ -45,13 +47,14 @@ Este documento consolida os componentes prioritários identificados nos arquivos
 ## Implementação em código
 - [`src/configuracao/carregador-tokens.ts`](../../src/configuracao/carregador-tokens.ts): responsável por ler os tokens em YAML e validar a estrutura com `zod`.
 - [`src/componentes/catalogo-base.ts`](../../src/componentes/catalogo-base.ts): expõe o catálogo imutável de componentes com estados, tokens fundamentais e diretrizes responsivas.
+- [`src/componentes/index.ts`](../../src/componentes/index.ts): reexporta utilitários como `listarCatalogoBase`, `obterComponenteBase` e `montarTemaBase` para facilitar o consumo externo.
 - [`src/componentes/tema-styled.ts`](../../src/componentes/tema-styled.ts): converte os tokens aprovados em um objeto de tema pronto para consumo pelos `styled-components`.
 
 ## Origem dos tokens e rastreabilidade
 - **Cores:** replicam os estilos `Foundations / Colors / Primárias` e `Foundations / Colors / Feedback` do arquivo Figma "Biblioteca Web v1". Cada chave (`primarias.destaque`, `feedback.erro` etc.) corresponde ao nome exibido na paleta compartilhada com o time de produto.
 - **Tipografia:** deriva dos estilos `Foundations / Typography` do mesmo arquivo, mantendo pesos e tamanhos originais. O gerador deve usar essas entradas para montar os `styled-components` tipográficos (`Heading`, `Subheading`, `Body`, `Caption`).
 - **Espaçamentos:** baseados na grade `Foundations / Spacing` definida na página de tokens do Figma. Os valores `compacto` e `confortavel` traduzem as escalas compacta e padrão utilizadas nas telas prioritárias.
-- **Processo de atualização:** qualquer mudança aprovada no Figma deve ser sincronizada manualmente para `config/tokens/tema-padrao.yaml`, seguindo o mesmo nome do estilo para preservar a ligação automática.
+- **Processo de atualização:** qualquer mudança aprovada no Figma deve ser sincronizada manualmente para `config/tokens/tema-padrao.yaml`, seguindo o mesmo nome do estilo para preservar a ligação automática e manter `montarTemaBase` compatível.
 
 ---
 **Referência de tokens:** o arquivo `config/tokens/tema-padrao.yaml` centraliza cores, tipografia e espaçamentos. O gerador automático deve importar esses valores antes de compor as variações de styled-components, garantindo que os estados de interação descritos aqui utilizem as mesmas definições.

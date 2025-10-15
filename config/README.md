@@ -1,14 +1,17 @@
 # Configurações declarativas
 
-O diretório `config/` abriga arquivos necessários para parametrizar o comportamento do gerador e do fluxo de deploy. Aqui ficam definições reutilizáveis que podem ser compartilhadas entre ambientes ou equipes.
+O diretório `config/` centraliza todos os insumos declarativos utilizados pelos módulos disponíveis em `src/`. As informações aqui descritas alimentam a CLI de listagem/validação, o catálogo de componentes e os planos de evolução registrados em `docs/`.
 
-## Estrutura atual
-- `projetos/`: coleção de arquivos YAML que descrevem projetos do Figma e seus destinos na Vercel.
-- `figma/`: índice dos protótipos oficiais com links, responsáveis e status de revisão.
-- `metricas/`: limiares de qualidade e metas de desempenho utilizadas nas rotinas de validação.
-- `tokens/`: temas de design aprovados com paletas, tipografia e espaçamentos consumidos pelo gerador.
+## Estrutura
+- [`projetos/`](projetos/README.md): arquivos YAML com dados fictícios de projetos Figma e destinos de deploy.
+- [`figma/`](figma/indice-prototipos.yaml): índice com links, responsáveis e escopo dos protótipos de referência.
+- [`tokens/`](tokens/README.md): temas de design consumidos pelo carregador de tokens e pelo catálogo de componentes.
+- [`metricas/`](metricas/padroes-qualidade.yaml): limiares e comandos planejados para monitorar qualidade do pipeline.
 
-## Convenções
-- Utilize formatos declarativos (YAML ou JSON) com indentação consistente de dois espaços.
-- Nunca armazene credenciais reais. Use placeholders claros (por exemplo, `token_figma_exemplo`).
-- Ao adicionar novos arquivos, atualize o README correspondente no subdiretório.
+## Convenções gerais
+- Use YAML com indentação de dois espaços e mantenha comentários apenas quando essenciais.
+- Prefira valores fictícios claros (`FIGMA_TOKEN_EXEMPLO`, `https://api.exemplo.com`) e jamais exponha credenciais reais.
+- Atualize o README específico de cada subdiretório ao criar, renomear ou remover arquivos.
+
+## Validação rápida
+Execute `npm run validar:configuracoes` para garantir que todos os arquivos em `config/projetos/` estejam de acordo com o esquema definido em [`src/configuracao/esquema.ts`](../src/configuracao/esquema.ts). Aproveite para revisar também os tokens com o utilitário `CarregadorTokensDesign` antes de publicar novos temas.
