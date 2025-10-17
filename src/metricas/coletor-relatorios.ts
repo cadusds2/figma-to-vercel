@@ -257,10 +257,9 @@ function extrairEstatisticasPlaywright(estrutura: Record<string, unknown>): Esta
     const instaveis = selecionarNumero(estatisticas.flaky) ?? 0;
     const ignorados = selecionarNumero(estatisticas.skipped) ?? 0;
     const duracao = selecionarNumero(estatisticas.duration) ?? 0;
-    const totalCalculado = esperados + inesperados + instaveis + ignorados;
-    const total = selecionarNumero(estatisticas.total) ?? totalCalculado;
-    const aprovados = selecionarNumero(estatisticas.passed) ?? esperados + instaveis;
-    const falhas = selecionarNumero(estatisticas.failed) ?? selecionarNumero(estatisticas.failures) ?? inesperados;
+    const total = esperados + inesperados + instaveis + ignorados;
+    const aprovados = esperados + instaveis;
+    const falhas = inesperados;
     return {
       total,
       aprovados,
@@ -358,12 +357,21 @@ function construirComparacoes({
 }): ComparacaoLimiar[] {
   const comparacoes: ComparacaoLimiar[] = [];
 
-  const duracaoTotal = totais.duracaoSegundos;
-  const valorTaxaFalhaDeploy = resumoPlaywright
-    ? resumoPlaywright.totalTestes > 0
-      ? resumoPlaywright.testesComFalha / resumoPlaywright.totalTestes
-      : 0
-    : null;
+  const possuiTestesExecutados = totais.testesExecutados > 0;
+  const duracaoTotal = possuiTestesExecutados ? totais.duracaoSegundos : null;
+
+  let valorTaxaFalhaDeploy: number | null = null;
+  let mensagemTaxaFalha: string | undefined;
+  if (!resumoPlaywright) {
+    mensagemTaxaFalha =
+      'Nenhum relatório de Playwright foi informado; não foi possível calcular a taxa de falhas do deploy.';
+  } else if (resumoPlaywright.totalTestes === 0) {
+    mensagemTaxaFalha =
+      'O relatório do Playwright não contém casos executados; confirme a configuração dos testes end-to-end.';
+  } else {
+    valorTaxaFalhaDeploy = resumoPlaywright.testesComFalha / resumoPlaywright.totalTestes;
+    mensagemTaxaFalha = 'Indicador calculado a partir dos testes end-to-end do Playwright.';
+  }
 
   const mapaObservacoes: Record<string, { valor: number | null; mensagem?: string }> = {
     cobertura_componentes: {
@@ -373,12 +381,13 @@ function construirComparacoes({
     },
     tempo_pipeline_segundos: {
       valor: duracaoTotal,
+      mensagem: possuiTestesExecutados
+        ? undefined
+        : 'Nenhuma suíte de testes foi informada; execute as etapas antes de consolidar as métricas.',
     },
     taxa_falhas_deploy: {
       valor: valorTaxaFalhaDeploy,
-      mensagem: resumoPlaywright
-        ? 'Indicador calculado a partir dos testes end-to-end do Playwright.'
-        : 'Nenhum relatório de Playwright foi informado; não foi possível calcular a taxa de falhas do deploy.',
+      mensagem: mensagemTaxaFalha,
     },
     tempo_reacao_falhas_horas: {
       valor: null,
