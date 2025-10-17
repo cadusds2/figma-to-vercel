@@ -187,15 +187,10 @@ async function interpretarRelatorioJest({
 
 function extrairSuitesJUnit(conteudoXml: string): Array<Record<string, unknown>> {
   const suites: Array<Record<string, unknown>> = [];
-  const regexSuite = /<(testsuite|testsuites)\b[^>]*>/gi;
+  const regexSuite = /<testsuite\b[^>]*>/gi;
   let resultado: RegExpExecArray | null = regexSuite.exec(conteudoXml);
 
   while (resultado) {
-    const nomeTag = resultado[1]?.toLowerCase();
-    if (nomeTag === 'testsuites') {
-      resultado = regexSuite.exec(conteudoXml);
-      continue;
-    }
     const tag = resultado[0];
     suites.push({
       '@_tests': extrairNumeroDoAtributo(tag, 'tests'),
@@ -278,48 +273,49 @@ function extrairEstatisticasPlaywright(estrutura: Record<string, unknown>): Esta
   let ignorados = 0;
   let duracaoMs = 0;
 
-  const visitar = (noAtual: unknown): void => {
-    if (!noAtual || typeof noAtual !== 'object') {
+  function visitar(noAtual: unknown): void {
+    if (!noAtual) {
       return;
     }
+
+    if (Array.isArray(noAtual)) {
+      noAtual.forEach((filho) => visitar(filho));
+      return;
+    }
+
+    if (typeof noAtual !== 'object') {
+      return;
+    }
+
     const no = noAtual as Record<string, unknown>;
-    if (Array.isArray(no)) {
-      no.forEach((filho) => visitar(filho));
-      return;
-    }
 
-    if (Array.isArray(no.suites)) {
-      no.suites.forEach((suite) => visitar(suite));
-    }
-
-    if (Array.isArray(no.specs)) {
-      no.specs.forEach((spec) => visitar(spec));
-    }
-
-    if (Array.isArray(no.tests)) {
-      no.tests.forEach((teste) => {
-        visitar(teste);
-      });
-    }
+    visitarColecao(no.suites);
+    visitarColecao(no.specs);
+    visitarColecao(no.tests);
 
     if (Array.isArray(no.results)) {
       no.results.forEach((resultado) => {
-        const duracaoResultado = selecionarNumero((resultado as Record<string, unknown>).duration) ?? 0;
+        const registro = resultado as Record<string, unknown>;
+        const duracaoResultado = selecionarNumero(registro.duration) ?? 0;
         duracaoMs += duracaoResultado;
-        const estado = (resultado as Record<string, unknown>).status ?? (resultado as Record<string, unknown>).outcome;
+        const estado = registro.status ?? registro.outcome;
         total += 1;
         if (estado === 'skipped') {
           ignorados += 1;
-        } else if (estado === 'passed' || estado === 'expected') {
-          aprovados += 1;
-        } else if (estado === 'flaky') {
+        } else if (estado === 'passed' || estado === 'expected' || estado === 'flaky') {
           aprovados += 1;
         } else {
           falhas += 1;
         }
       });
     }
-  };
+  }
+
+  function visitarColecao(colecao: unknown): void {
+    if (Array.isArray(colecao)) {
+      colecao.forEach((item) => visitar(item));
+    }
+  }
 
   suites.forEach((suite) => visitar(suite));
 
