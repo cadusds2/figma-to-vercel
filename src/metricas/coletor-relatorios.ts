@@ -191,6 +191,11 @@ function extrairSuitesJUnit(conteudoXml: string): Array<Record<string, unknown>>
   let resultado: RegExpExecArray | null = regexSuite.exec(conteudoXml);
 
   while (resultado) {
+    const nomeTag = resultado[1]?.toLowerCase();
+    if (nomeTag === 'testsuites') {
+      resultado = regexSuite.exec(conteudoXml);
+      continue;
+    }
     const tag = resultado[0];
     suites.push({
       '@_tests': extrairNumeroDoAtributo(tag, 'tests'),
@@ -281,6 +286,10 @@ function extrairEstatisticasPlaywright(estrutura: Record<string, unknown>): Esta
     if (Array.isArray(no)) {
       no.forEach((filho) => visitar(filho));
       return;
+    }
+
+    if (Array.isArray(no.suites)) {
+      no.suites.forEach((suite) => visitar(suite));
     }
 
     if (Array.isArray(no.specs)) {
