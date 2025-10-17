@@ -252,11 +252,15 @@ interface EstatisticasPlaywright {
 function extrairEstatisticasPlaywright(estrutura: Record<string, unknown>): EstatisticasPlaywright {
   const estatisticas = estrutura.stats as Partial<Record<string, number>> | undefined;
   if (estatisticas) {
-    const total = selecionarNumero(estatisticas.total) ?? selecionarNumero(estatisticas.expected) ?? 0;
-    const aprovados = selecionarNumero(estatisticas.passed) ?? 0;
-    const falhas = selecionarNumero(estatisticas.failed) ?? selecionarNumero(estatisticas.failures) ?? 0;
+    const esperados = selecionarNumero(estatisticas.expected) ?? 0;
+    const inesperados = selecionarNumero(estatisticas.unexpected) ?? 0;
+    const instaveis = selecionarNumero(estatisticas.flaky) ?? 0;
     const ignorados = selecionarNumero(estatisticas.skipped) ?? 0;
     const duracao = selecionarNumero(estatisticas.duration) ?? 0;
+    const totalCalculado = esperados + inesperados + instaveis + ignorados;
+    const total = selecionarNumero(estatisticas.total) ?? totalCalculado;
+    const aprovados = selecionarNumero(estatisticas.passed) ?? esperados + instaveis;
+    const falhas = selecionarNumero(estatisticas.failed) ?? selecionarNumero(estatisticas.failures) ?? inesperados;
     return {
       total,
       aprovados,
