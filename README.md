@@ -6,7 +6,8 @@ Ferramentas em TypeScript para transformar configurações declarativas em bases
 - **Carregamento de projetos**: `CarregadorConfiguracoesProjetos` varre `config/projetos/`, valida cada arquivo com Zod e expõe métodos para listar e selecionar projetos por identificador.
 - **Tokens de design**: `CarregadorTokensDesign` lê os temas declarados em `config/tokens/`, validando estrutura e mensagens de erro em português.
 - **Catálogo de componentes**: `src/componentes/` concentra o catálogo base e utilitários para montar temas compatíveis com `styled-components`.
-- **CLI de apoio**: comandos em `src/cli/` permitem listar e validar configurações antes de executar fluxos automatizados.
+- **CLI de apoio**: comandos em `src/cli/` permitem listar, validar configurações e consolidar métricas antes de executar fluxos automatizados.
+- **Métricas do pipeline**: o módulo `src/metricas/` interpreta relatórios de testes e compara indicadores com os limiares definidos em `config/metricas/padroes-qualidade.yaml`.
 
 Com esses blocos, já é possível preparar protótipos e configurações enquanto o parser de Figma, o gerador de código e a automação de deploy são planejados nas issues do diretório [`docs/issues/`](docs/issues/README.md).
 
@@ -19,11 +20,19 @@ Com esses blocos, já é possível preparar protótipos e configurações enquan
 npm run listar:projetos
 npm run validar:configuracoes
 npm run compilar
+npm run test:unit
+npm run test:integracao
+npm run test:e2e
+npm run gerar:metricas
 ```
 
 - `listar:projetos` apresenta os projetos declarados em `config/projetos/` e seus destinos fictícios na Vercel.
 - `validar:configuracoes` garante que os arquivos YAML estejam aderentes ao esquema.
 - `compilar` gera os arquivos JavaScript em `dist/` caso deseje consumir os utilitários em outro projeto.
+- `test:unit` executa os testes unitários do Jest e salva o relatório JUnit em `relatorios/junit/testes-unitarios.xml`.
+- `test:integracao` roda as suítes de integração do Jest e registra a saída em `relatorios/junit/testes-integracao.xml`.
+- `test:e2e` inicia o Playwright utilizando `playwright.config.ts`, produzindo `relatorios/playwright/resultados.json`.
+- `gerar:metricas` lê todos os relatórios disponíveis e consolida `dist/metricas/relatorio.json` com o comparativo contra os limiares.
 
 ## Estrutura do repositório
 
@@ -54,8 +63,12 @@ figma-to-vercel/
 │   └── README.md
 ├── src/
 │   ├── cli/
+│   │   ├── gerar-metricas.ts
 │   │   ├── listar-projetos.ts
 │   │   └── validar-configuracoes.ts
+│   ├── metricas/
+│   │   ├── coletor-relatorios.ts
+│   │   └── README.md
 │   ├── componentes/
 │   │   ├── catalogo-base.ts
 │   │   ├── tema-styled.ts

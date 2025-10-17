@@ -20,18 +20,25 @@ Este guia consolida as decisões do Passo 3 do roadmap descrito em [`docs/issues
 3. Consolidar fluxos end-to-end apenas após a estabilização das camadas internas, reaproveitando dados fictícios já versionados.
 
 ## Métricas e limiares
-Os limiares abaixo estão catalogados em [`config/metricas/padroes-qualidade.yaml`](../../config/metricas/padroes-qualidade.yaml) para consumo por scripts de observabilidade. Os comandos citados naquele arquivo (`npm run test:unit`, `npm run test:integracao`, `npm run test:e2e`) ainda não foram implementados na CLI; trate-os como placeholders ao construir o pipeline.
+Os limiares abaixo estão catalogados em [`config/metricas/padroes-qualidade.yaml`](../../config/metricas/padroes-qualidade.yaml) para consumo por scripts de observabilidade. Os comandos `npm run test:unit`, `npm run test:integracao` e `npm run test:e2e` estão disponíveis e produzem relatórios nos formatos consumidos pelo coletor descrito a seguir.
 
 - **Cobertura de componentes automatizados:** mínimo aceitável de 85% do catálogo suportado (bloqueio abaixo de 70%).
 - **Tempo total do pipeline automático:** alvo de até 5 minutos, com bloqueio acima de 7 minutos.
 - **Taxa de falhas por deploy automático:** manter abaixo de 5% das execuções semanais, investigando qualquer pico acima de 2%.
 - **Tempo de reação a falhas críticas:** abrir correção em até 4 horas úteis após o alerta, com plano de contingência documentado.
 
+### Execução das suítes
+- `npm run test:unit`: gera `relatorios/junit/testes-unitarios.xml` com o resumo das validações unitárias.
+- `npm run test:integracao`: produz `relatorios/junit/testes-integracao.xml` a partir das suítes de integração.
+- `npm run test:e2e`: utiliza `playwright.config.ts` para salvar `relatorios/playwright/resultados.json` com o estado de cada fluxo end-to-end.
+
+Após executar as suítes, rode `npm run gerar:metricas` para consolidar `dist/metricas/relatorio.json`. O comando está implementado em `src/cli/gerar-metricas.ts` e reutiliza o coletor `src/metricas/coletor-relatorios.ts`, que interpreta os relatórios do Jest (JUnit) e do Playwright (JSON) comparando-os com os limiares estabelecidos.
+
 ## Coleta e monitoramento
-- Registrar a execução dos testes unitários e de integração com relatórios JUnit exportados pelo Jest assim que os scripts estiverem disponíveis.
-- Consolidar resultados de Playwright e da CLI da Vercel em relatórios JSON interpretados pelo pipeline de CI.
-- Enviar métricas para dashboard compartilhado (por exemplo, Data Studio ou Grafana) alimentado por scripts que consomem os relatórios padronizados.
-- Configurar alertas automáticos quando algum limiar do arquivo de métricas for violado, notificando o time em canal dedicado.
+- Versionar os relatórios gerados em `relatorios/` apenas como artefatos temporários do pipeline; o arquivo de saída em `dist/metricas/relatorio.json` é o insumo oficial para ingestão em ferramentas externas.
+- Enviar o JSON consolidado para um bucket ou tópico acessível ao dashboard compartilhado (Data Studio, Grafana ou equivalente) a cada execução da pipeline de CI.
+- Configurar o sistema de alertas (PagerDuty, Opsgenie ou similar) para consumir o campo `comparacoes` do relatório consolidado, disparando notificações quando algum limiar estiver em situação `entre_alvo_e_bloqueio` ou `abaixo_bloqueio`.
+- Alimentar retrospectivas com a seção `mensagem` de cada indicador, garantindo transparência sobre dados indisponíveis ou ações pendentes.
 
 ## Ações corretivas
 - Ao atingir o limiar de bloqueio de qualquer métrica, pausar novos deploys automatizados até estabilizar o indicador.
@@ -39,9 +46,9 @@ Os limiares abaixo estão catalogados em [`config/metricas/padroes-qualidade.yam
 - Revisar trimestralmente os limiares para adaptá-los conforme o catálogo de componentes crescer.
 
 ## Próximas atividades recomendadas
-Executar uma única tarefa abrangente que implemente a automatização dos relatórios do pipeline, contemplando:
-1. Scripts de conversão dos relatórios de Jest e Playwright para o formato definido em `config/metricas/padroes-qualidade.yaml`.
-2. Integração desses relatórios ao pipeline CI (GitHub Actions ou similar) com publicação em dashboard compartilhado.
+Executar uma única tarefa abrangente para integrar o relatório consolidado ao pipeline, contemplando:
+1. Publicação automática do arquivo `dist/metricas/relatorio.json` como artefato da execução.
+2. Integração do JSON consolidado ao dashboard compartilhado, priorizando visualizações por indicador (`comparacoes`).
 3. Configuração de alertas automáticos vinculados aos limiares de bloqueio para impedir deploys fora dos padrões.
 
 Com essas definições, o Passo 3 fica pronto para implementação incremental, mantendo rastreabilidade das validações e indicadores essenciais do produto.
