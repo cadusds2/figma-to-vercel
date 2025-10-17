@@ -6,7 +6,11 @@
   "scripts": {
     "compilar": "tsc",
     "listar:projetos": "ts-node src/cli/listar-projetos.ts",
-    "validar:configuracoes": "ts-node src/cli/validar-configuracoes.ts"
+    "validar:configuracoes": "ts-node src/cli/validar-configuracoes.ts",
+    "gerar:metricas": "ts-node src/cli/gerar-metricas.ts",
+    "test:unit": "JEST_JUNIT_OUTPUT_DIR=relatorios/junit JEST_JUNIT_OUTPUT_NAME=testes-unitarios.xml jest --config jest.config.unit.js",
+    "test:integracao": "JEST_JUNIT_OUTPUT_DIR=relatorios/junit JEST_JUNIT_OUTPUT_NAME=testes-integracao.xml jest --config jest.config.integracao.js",
+    "test:e2e": "playwright test --config playwright.config.ts"
   },
   "keywords": [
     "figma",
@@ -22,7 +26,12 @@
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
+    "@types/jest": "^29.5.12",
+    "@playwright/test": "^1.44.0",
+    "jest": "^29.7.0",
+    "jest-junit": "^16.0.0",
     "ts-node": "^10.9.2",
+    "ts-jest": "^29.1.2",
     "typescript": "^5.4.5"
   }
 }
